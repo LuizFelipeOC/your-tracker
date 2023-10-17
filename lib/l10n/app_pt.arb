@@ -1,3 +1,8 @@
 {
-    "hello": "Olá mundo"
+    "firstWelcomeText": "Bem-vindo em\n",
+    "secondWelcomeText": "YourTrack",
+    "subTitleWelcomeText": "Acompanhe melhor seus pacotes",
+    "welcomeFirstButton": "Começar agora",
+    "or": "Ou",
+    "simpleSearch": "Pesquisa Simples"
 }
