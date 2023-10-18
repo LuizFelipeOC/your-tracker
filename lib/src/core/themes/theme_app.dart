@@ -5,7 +5,7 @@ import 'app_colors.dart';
 final class ThemeApp {
   static ThemeData get theme => ThemeData(
         fontFamily: 'Ubuntu',
-        scaffoldBackgroundColor: AppColors.backgroundColor,
+        scaffoldBackgroundColor: AppColors.white,
         textTheme: _textTheme(),
         textButtonTheme: _textButtonTheme(),
         elevatedButtonTheme: _elevatedButtonTheme(),
@@ -24,6 +24,12 @@ final class ThemeApp {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        textStyle: MaterialStatePropertyAll(
+          TextStyle(
+            color: AppColors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -33,8 +39,15 @@ final class ThemeApp {
           foregroundColor: MaterialStatePropertyAll<Color>(
             AppColors.primaryColor,
           ),
+          textStyle: const MaterialStatePropertyAll(
+            TextStyle(
+              fontSize: 16,
+              letterSpacing: 1,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           overlayColor: MaterialStatePropertyAll(
-            AppColors.grey,
+            AppColors.secondaryColor,
           ),
         ),
       );
@@ -47,23 +60,28 @@ final class ThemeApp {
         ),
         headlineMedium: TextStyle(
           color: AppColors.primaryColor,
+          fontWeight: FontWeight.bold,
+        ),
+        headlineSmall: TextStyle(
+          color: AppColors.grey,
           fontWeight: FontWeight.w400,
         ),
         bodyLarge: TextStyle(
           color: AppColors.white,
-          fontSize: 18,
-          letterSpacing: 2,
-          fontWeight: FontWeight.w500,
+          fontSize: 20,
+          letterSpacing: 1,
+          fontWeight: FontWeight.w700,
         ),
         bodyMedium: TextStyle(
-          color: AppColors.white,
-          fontSize: 16,
-          letterSpacing: 4.75,
+          color: AppColors.grey,
+          fontSize: 18,
+          letterSpacing: 1,
+          fontWeight: FontWeight.bold,
         ),
         bodySmall: TextStyle(
-          color: AppColors.white,
-          fontSize: 14,
-          letterSpacing: 4.75,
+          color: AppColors.grey,
+          fontSize: 16,
+          letterSpacing: 1,
         ),
       );
 }
