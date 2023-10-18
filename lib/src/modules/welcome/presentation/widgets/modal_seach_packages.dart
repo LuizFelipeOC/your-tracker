@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/app_images.dart';
+import '../../../../core/widgets/lotties_widgets/lottie_assets.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   const ModalSearchPackges({
@@ -69,6 +71,23 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                 ),
               )
             ],
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LottieAssetsWidget(
+                  pathAnimation: AppImage.laoding,
+                  width: MediaQuery.of(context).size.width * .7,
+                ),
+                const Text(
+                  'Aguarde estamos rastreando seu pacote...',
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
           ),
         )
       ],
