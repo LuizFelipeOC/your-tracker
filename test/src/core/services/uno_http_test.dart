@@ -35,7 +35,7 @@ void main() {
         ),
       );
 
-      final sut = await uno.get(path: path, headers: headers);
+      final sut = await uno.get();
 
       expect(sut.isSuccess(), isTrue);
 
@@ -57,7 +57,7 @@ void main() {
             ),
           ),
         );
-        final sut = await uno.get(path: path, headers: headers);
+        final sut = await uno.get();
 
         expect(sut.isError(), isTrue);
 

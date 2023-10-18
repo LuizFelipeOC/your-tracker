@@ -10,11 +10,12 @@ class UnoService implements IHttpService {
   Uno uno;
 
   GetUrlUtils getUrlUtils = GetUrlUtils();
+  Map<String, String> headers = {};
 
   UnoService({required this.uno});
 
   @override
-  AsyncResult<SuccessConnection, FailureConnection> get({required String path, required Map<String, String> headers}) async {
+  AsyncResult<SuccessConnection, FailureConnection> get() async {
     try {
       final response = await uno.get(getUrlUtils.url, headers: headers);
 

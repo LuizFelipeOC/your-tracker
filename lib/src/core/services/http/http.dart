@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:result_dart/result_dart.dart';
 
 abstract class IHttpService {
-  AsyncResult<SuccessConnection, FailureConnection> get({required String path, required Map<String, String> headers});
+  AsyncResult<SuccessConnection, FailureConnection> get();
 }
 
 final class SuccessConnection {
