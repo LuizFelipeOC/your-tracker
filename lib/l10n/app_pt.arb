@@ -4,5 +4,7 @@
     "subTitleWelcomeText": "Acompanhe melhor seus pacotes",
     "welcomeFirstButton": "Começar agora",
     "or": "Ou",
-    "simpleSearch": "Pesquisa Simples"
+    "simpleSearch": "Pesquisa Simples",
+    "searchingPackage": "Aguarde, estamos procurando seu pacote...",
+    "trackingCode": "Código do rastreio"
 }

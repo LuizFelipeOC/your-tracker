@@ -4,5 +4,7 @@
     "subTitleWelcomeText": "Track your packages better",
     "welcomeFirstButton":"Start now",
     "or": "Or",
-    "simpleSearch": "Simple Search"
+    "simpleSearch": "Simple Search",
+    "searchingPackage": "Wait, we are looking for your package...",
+    "trackingCode": "Code Tracking"
 }
