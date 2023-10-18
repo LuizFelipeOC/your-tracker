@@ -19,8 +19,6 @@ class UnoService implements IHttpService {
     try {
       final response = await uno.get(getUrlUtils.url + path, headers: headers);
 
-      print(response.request);
-
       return Success(SuccessConnection(data: response.data));
     } on HttpException catch (err) {
       return Failure(FailureConnection(message: err.message, statusCode: 0));
