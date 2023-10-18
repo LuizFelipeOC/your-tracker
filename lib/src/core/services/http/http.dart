@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:result_dart/result_dart.dart';
 
 abstract class IHttpService {
-  AsyncResult<SuccessConnection, FailureConnection> get();
+  AsyncResult<SuccessConnection, FailureConnection> get({required String path});
 }
 
 final class SuccessConnection {
@@ -13,7 +13,7 @@ final class SuccessConnection {
 }
 
 class FailureConnection {
-  int statusCode;
+  int? statusCode;
   String message;
 
   FailureConnection({required this.message, required this.statusCode}) {
@@ -25,7 +25,7 @@ class FailureConnection {
       return message = 'Unauthorized';
     }
 
-    if (statusCode != 0) {
+    if (statusCode != 0 && statusCode != null) {
       final decodingObject = (jsonDecode(message)) as Map<String, dynamic>;
       return message = decodingObject['message'];
     }
