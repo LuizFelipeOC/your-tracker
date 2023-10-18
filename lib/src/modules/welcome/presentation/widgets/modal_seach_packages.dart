@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_images.dart';
@@ -27,7 +28,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
             children: [
               Flexible(
                 child: Text(
-                  'Simple Search',
+                  AppLocalizations.of(context)!.simpleSearch,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
@@ -54,7 +55,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                   cursorColor: AppColors.secondaryColor,
                   onChanged: (value) {},
                   decoration: InputDecoration(
-                    hintText: 'Tracking code',
+                    hintText: AppLocalizations.of(context)!.trackingCode,
                     hintStyle: Theme.of(context).textTheme.labelLarge,
                     counterText: '',
                   ),
@@ -82,9 +83,12 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                   pathAnimation: AppImage.laoding,
                   width: MediaQuery.of(context).size.width * .7,
                 ),
-                const Text(
-                  'Aguarde estamos rastreando seu pacote...',
-                  textAlign: TextAlign.center,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    AppLocalizations.of(context)!.searchingPackage,
+                    textAlign: TextAlign.center,
+                  ),
                 )
               ],
             ),
