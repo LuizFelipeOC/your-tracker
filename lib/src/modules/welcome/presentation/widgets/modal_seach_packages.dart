@@ -191,7 +191,12 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                 );
               }
 
-              return Container();
+              return Center(
+                child: Text(
+                  AppLocalizations.of(context)!.idleTrackerState,
+                  textAlign: TextAlign.center,
+                ),
+              );
             },
           ),
         )
