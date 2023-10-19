@@ -79,14 +79,14 @@ const responseEvents = '''
         "hora": "11:35:24",
         "local": "VARZEA GRANDE - MT",
         "status": "Objeto entregue ao destinatário",
-        "subStatus": []
+        "subStatus": [""]
       },
       {
         "data": "08/08/2023",
         "hora": "11:34:57",
         "local": "VARZEA GRANDE - MT",
         "status": "Objeto saiu para entrega ao destinatário",
-        "subStatus": []
+        "subStatus": [""]
       }
      ]
     }

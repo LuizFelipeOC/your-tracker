@@ -19,11 +19,7 @@ class PackagesModel {
   factory PackagesModel.fromMap(Map<String, dynamic> map) {
     return PackagesModel(
       codigo: map['codigo'] as String,
-      eventos: List<EventsModel>.from(
-        (map['eventos'] as List<dynamic>).map<EventsModel>(
-          (x) => EventsModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      eventos: (map['eventos'] as List<dynamic>).map((e) => EventsModel.fromMap(e)).toList(),
     );
   }
 }

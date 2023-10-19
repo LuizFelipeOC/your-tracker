@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:result_dart/result_dart.dart';
 
 import '../../../services/http/http.dart';
@@ -34,9 +32,7 @@ class SearchPackagesRepository implements IPackges {
   }
 
   PackagesModel _transformPackagesList({required data}) {
-    final tranformMap = (jsonDecode(data)) as Map<String, dynamic>;
-
-    final transformInObject = PackagesModel.fromMap(tranformMap);
+    final transformInObject = PackagesModel.fromMap(data);
     return transformInObject;
   }
 }

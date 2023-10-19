@@ -111,5 +111,10 @@ final class ThemeApp {
           fontWeight: FontWeight.w500,
           fontSize: 16,
         ),
+        labelMedium: TextStyle(
+          fontSize: 14,
+          color: AppColors.primaryColor,
+          fontWeight: FontWeight.bold,
+        ),
       );
 }
