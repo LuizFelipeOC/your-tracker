@@ -6,5 +6,7 @@
     "or": "Ou",
     "simpleSearch": "Pesquisa Simples",
     "searchingPackage": "Aguarde, estamos procurando seu pacote...",
-    "trackingCode": "Código do rastreio"
+    "trackingCode": "Código do rastreio",
+    "errorGetPackage": "Ocorreu um erro ao tentar buscar o pacote, ",
+    "seeErrorMotives": "veja os possíveis motivos"
 }
