@@ -8,5 +8,6 @@
     "searchingPackage": "Wait, we are looking for your package...",
     "trackingCode": "Code Tracking",
     "errorGetPackage": "An error occurred while trying to fetch the package, ",
-    "seeErrorMotives": "see the possible reasons"
+    "seeErrorMotives": "see the possible reasons",
+    "idleTrackerState":"Digite o código de rastreamento e localize seu pedido"
 }

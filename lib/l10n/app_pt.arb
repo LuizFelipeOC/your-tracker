@@ -8,5 +8,7 @@
     "searchingPackage": "Aguarde, estamos procurando seu pacote...",
     "trackingCode": "Código do rastreio",
     "errorGetPackage": "Ocorreu um erro ao tentar buscar o pacote, ",
-    "seeErrorMotives": "veja os possíveis motivos"
+    "seeErrorMotives": "veja os possíveis motivos",
+    "idleTrackerState":"Enter the tracking code and locate your order"
+
 }
