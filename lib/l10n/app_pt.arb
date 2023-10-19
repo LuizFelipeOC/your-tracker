@@ -9,6 +9,5 @@
     "trackingCode": "Código do rastreio",
     "errorGetPackage": "Ocorreu um erro ao tentar buscar o pacote, ",
     "seeErrorMotives": "veja os possíveis motivos",
-    "idleTrackerState":"Enter the tracking code and locate your order"
-
+    "idleTrackerState":"Digite o código de rastreamento e localize seu pedido"
 }

@@ -9,5 +9,6 @@
     "trackingCode": "Code Tracking",
     "errorGetPackage": "An error occurred while trying to fetch the package, ",
     "seeErrorMotives": "see the possible reasons",
-    "idleTrackerState":"Digite o código de rastreamento e localize seu pedido"
+    "idleTrackerState":"Enter the tracking code and locate your order"
+
 }
