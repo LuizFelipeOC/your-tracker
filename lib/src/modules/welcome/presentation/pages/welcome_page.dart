@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/themes/app_images.dart';
 import '../widgets/modal_seach_packages.dart';
@@ -70,7 +71,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       height: 46,
                       width: screen.width * .80,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => Modular.to.pushReplacementNamed('/home/'),
                         child: Text(
                           AppLocalizations.of(context)!.welcomeFirstButton,
                           style: Theme.of(context).textTheme.bodyLarge,
