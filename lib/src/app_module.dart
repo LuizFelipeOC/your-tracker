@@ -3,6 +3,7 @@ import 'package:uno/uno.dart';
 
 import 'core/services/http/http.dart';
 import 'core/services/http/uno.dart';
+import 'modules/home/home_module.dart';
 import 'modules/welcome/welcome_module.dart';
 
 final class AppModule extends Module {
@@ -17,6 +18,12 @@ final class AppModule extends Module {
   @override
   void routes(RouteManager r) {
     r.module(Modular.initialRoute, module: WelcomeModule());
+    r.module(
+      '/home/',
+      module: HomeModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 200),
+    );
     super.routes(r);
   }
 }
