@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/themes/app_images.dart';
+import '../widgets/modal_seach_packages.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -17,13 +18,14 @@ class _WelcomePageState extends State<WelcomePage> {
     Size screen = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: SafeArea(
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
           height: screen.height,
-          width: screen.width,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: Container(
@@ -52,7 +54,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         width: screen.width * .5,
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(height: 20),
                     Text(
                       AppLocalizations.of(context)!.subTitleWelcomeText,
                       style: Theme.of(context).textTheme.bodyMedium,
@@ -62,9 +64,8 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Spacer(),
                     SizedBox(
                       height: 46,
                       width: screen.width * .80,
@@ -83,7 +84,18 @@ class _WelcomePageState extends State<WelcomePage> {
                     ),
                     const SizedBox(height: 10),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          useSafeArea: true,
+                          isScrollControlled: true,
+                          isDismissible: false,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
+                          context: context,
+                          builder: (ctx) => const ModalSearchPackges(),
+                        );
+                      },
                       child: Text(
                         AppLocalizations.of(context)!.simpleSearch,
                       ),
