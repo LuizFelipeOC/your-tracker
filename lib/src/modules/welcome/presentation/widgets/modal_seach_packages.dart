@@ -7,6 +7,7 @@ import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_images.dart';
 import '../../../../core/widgets/lotties_widgets/lottie_assets.dart';
 import '../controller/search_packages_controller.dart';
+import 'card_tracking_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   const ModalSearchPackges({
@@ -100,49 +101,8 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
 
                     return Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(
-                              color: AppColors.primaryColor,
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                items.status,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: state.packagesModel.eventos[index].subStatus?.length,
-                                itemBuilder: (ctx, idx) {
-                                  final subEvents = state.packagesModel.eventos[index].subStatus?[idx];
-
-                                  return Text(
-                                    subEvents.toString().replaceAll('[', '').replaceAll(']', ''),
-                                    style: Theme.of(context).textTheme.labelMedium,
-                                  );
-                                },
-                              ),
-                              Container(
-                                alignment: Alignment.bottomRight,
-                                child: Text(
-                                  '${items.data}  ${items.hora}',
-                                  style: Theme.of(context).textTheme.labelMedium,
-                                  textAlign: TextAlign.end,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: CardTrackingPackages(
+                        items: items,
                       ),
                     );
                   },
@@ -192,9 +152,12 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               }
 
               return Center(
-                child: Text(
-                  AppLocalizations.of(context)!.idleTrackerState,
-                  textAlign: TextAlign.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    AppLocalizations.of(context)!.idleTrackerState,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               );
             },
