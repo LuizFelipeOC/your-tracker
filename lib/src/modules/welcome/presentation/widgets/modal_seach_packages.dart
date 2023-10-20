@@ -1,13 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/app_images.dart';
-import '../../../../core/widgets/lotties_widgets/lottie_assets.dart';
 import '../controller/search_packages_controller.dart';
 import 'card_tracking_packages.dart';
+import 'erros_searchs_packages/error_search_packages_informations.dart';
+import 'loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   const ModalSearchPackges({
@@ -110,44 +109,13 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               }
 
               if (state is LoadingSearchPackagesState) {
-                return Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      LottieAssetsWidget(
-                        pathAnimation: AppImage.laoding,
-                        width: MediaQuery.of(context).size.width * .7,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          AppLocalizations.of(context)!.searchingPackage,
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    ],
-                  ),
-                );
+                return const LoadingSearchPackages();
               }
 
               if (state is ErrorSearchPackagesState) {
-                return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text.rich(
-                      TextSpan(
-                        text: AppLocalizations.of(context)!.errorGetPackage,
-                        children: [
-                          TextSpan(
-                            text: AppLocalizations.of(context)!.seeErrorMotives,
-                            style: Theme.of(context).textTheme.labelLarge,
-                            recognizer: TapGestureRecognizer()..onTap = () => {},
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  child: ErrorSearchPackageInformations(),
                 );
               }
 
