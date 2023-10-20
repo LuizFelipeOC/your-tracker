@@ -7,7 +7,9 @@
     "simpleSearch": "Pesquisa Simples",
     "searchingPackage": "Aguarde, estamos procurando seu pacote...",
     "trackingCode": "Código do rastreio",
-    "errorGetPackage": "Ocorreu um erro ao tentar buscar o pacote, ",
-    "seeErrorMotives": "veja os possíveis motivos",
+    "errorGetPackage": "Ocorreu um erro ao tentar buscar o pacote, veja os possíveis motivos",
+    "firstErrorGetPackage": "O código informado está vazio!",
+    "secondErrorGetPackage": "O código informado está inválido!",
+    "thirdErrorErrorGetPackage": "O objeto ainda não foi inserido na base de dados do correio",
     "idleTrackerState":"Digite o código de rastreamento e localize seu pedido"
 }

@@ -7,8 +7,10 @@
     "simpleSearch": "Simple Search",
     "searchingPackage": "Wait, we are looking for your package...",
     "trackingCode": "Code Tracking",
-    "errorGetPackage": "An error occurred while trying to fetch the package, ",
-    "seeErrorMotives": "see the possible reasons",
+    "errorGetPackage": "An error occurred while trying to fetch the package, see the possible reasons ",
+    "firstErrorGetPackage": "The provided code is empty!",
+    "secondErrorGetPackage": "The provided code is invalid!",
+    "thirdErrorErrorGetPackage": "The item hasn't been added to the courier's database yet",
     "idleTrackerState":"Enter the tracking code and locate your order"
 
 }
