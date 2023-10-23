@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/themes/app_images.dart';
 import '../controller/start_now_controller.dart';
+import '../states/start_now_state.dart';
 import '../widgets/modal_seach_packages.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -16,6 +17,17 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   final starNowController = Modular.get<StartNowController>();
+
+  @override
+  void initState() {
+    starNowController.addListener(() {
+      if (starNowController.value is LoadedNowState) {
+        Navigator.pushReplacementNamed(context, '/home/');
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
