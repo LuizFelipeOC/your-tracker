@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/themes/app_images.dart';
+import '../controller/start_now_controller.dart';
 import '../widgets/modal_seach_packages.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -14,6 +15,8 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  final starNowController = Modular.get<StartNowController>();
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
