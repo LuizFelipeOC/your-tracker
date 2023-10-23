@@ -21,6 +21,7 @@ dependencies:
   result_dart: ^1.1.0
   uno: ^1.1.9
   mocktail: ^1.0.1
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
   flutter_test:
