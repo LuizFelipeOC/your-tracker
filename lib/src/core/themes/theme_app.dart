@@ -11,6 +11,9 @@ final class ThemeApp {
         elevatedButtonTheme: _elevatedButtonTheme(),
         iconTheme: IconThemeData(color: AppColors.grey),
         inputDecorationTheme: _inputTheme(),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primaryColor,
+        ),
         splashColor: AppColors.primaryColor,
         brightness: Brightness.light,
         primaryColor: AppColors.primaryColor,
