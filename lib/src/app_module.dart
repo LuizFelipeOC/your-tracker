@@ -27,19 +27,19 @@ final class AppModule extends Module {
       Modular.initialRoute,
       module: SplashModules(),
       transition: TransitionType.fadeIn,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 400),
     );
     r.module(
       '/welcome/',
       module: WelcomeModule(),
       transition: TransitionType.fadeIn,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 400),
     );
     r.module(
       '/home/',
       module: HomeModule(),
       transition: TransitionType.fadeIn,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 400),
     );
     super.routes(r);
   }
