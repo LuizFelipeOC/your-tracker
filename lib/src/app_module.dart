@@ -8,6 +8,7 @@ import 'core/services/local_storage/flutter_secure_storage.dart';
 import 'core/services/local_storage/local_storage_dart.dart';
 import 'modules/home/home_module.dart';
 import 'modules/splash/splash_module.dart';
+import 'modules/welcome/welcome_module.dart';
 
 final class AppModule extends Module {
   @override
@@ -22,7 +23,18 @@ final class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.module(Modular.initialRoute, module: SplashModules());
+    r.module(
+      Modular.initialRoute,
+      module: SplashModules(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 200),
+    );
+    r.module(
+      '/welcome/',
+      module: WelcomeModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 200),
+    );
     r.module(
       '/home/',
       module: HomeModule(),
