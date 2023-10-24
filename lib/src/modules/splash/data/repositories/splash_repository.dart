@@ -11,6 +11,8 @@ class SplashRepository {
   AsyncResult<SuccessGetStartNow, FailureGetStartNow> getStartNow() async {
     final result = await storage.read(key: 'start');
 
+    await Future.delayed(const Duration(seconds: 1));
+
     if (result.isSuccess()) {
       return Success(SuccessGetStartNow(message: 'Have cached info in start now'));
     }
