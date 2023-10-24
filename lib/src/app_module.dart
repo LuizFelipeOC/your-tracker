@@ -7,7 +7,7 @@ import 'core/services/http/uno.dart';
 import 'core/services/local_storage/flutter_secure_storage.dart';
 import 'core/services/local_storage/local_storage_dart.dart';
 import 'modules/home/home_module.dart';
-import 'modules/welcome/welcome_module.dart';
+import 'modules/splash/splash_module.dart';
 
 final class AppModule extends Module {
   @override
@@ -22,7 +22,7 @@ final class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.module(Modular.initialRoute, module: WelcomeModule());
+    r.module(Modular.initialRoute, module: SplashModules());
     r.module(
       '/home/',
       module: HomeModule(),
