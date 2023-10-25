@@ -10,8 +10,11 @@ import 'card_tracking_packages.dart';
 import 'loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
+  final bool isStarnedNow;
+
   const ModalSearchPackges({
     super.key,
+    required this.isStarnedNow,
   });
 
   @override
@@ -32,10 +35,15 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  AppLocalizations.of(context)!.simpleSearch,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
+                child: widget.isStarnedNow
+                    ? Text(
+                        AppLocalizations.of(context)!.searchingStartNowTitle,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      )
+                    : Text(
+                        AppLocalizations.of(context)!.simpleSearch,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
               ),
               InkWell(
                 overlayColor: MaterialStatePropertyAll(AppColors.grey.withOpacity(0.1)),
@@ -92,20 +100,34 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
             valueListenable: searchPackagesStore,
             builder: (ctx, state, _) {
               if (state is LoadedSearchPackagesState) {
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: state.packagesModel.eventos.length,
-                  itemBuilder: (context, index) {
-                    final items = state.packagesModel.eventos[index];
-
-                    return Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: CardTrackingPackages(
-                        items: items,
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text(AppLocalizations.of(context)!.favoriteYourPackage),
                       ),
-                    );
-                  },
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 60),
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: state.packagesModel.eventos.length,
+                        itemBuilder: (context, index) {
+                          final items = state.packagesModel.eventos[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: CardTrackingPackages(
+                              items: items,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 );
               }
 
@@ -131,7 +153,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               );
             },
           ),
-        )
+        ),
       ],
     );
   }
