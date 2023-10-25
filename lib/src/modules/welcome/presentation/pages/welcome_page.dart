@@ -86,7 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       height: 46,
                       width: screen.width * .80,
                       child: ElevatedButton(
-                        onPressed: () => Modular.to.pushReplacementNamed('/home/'),
+                        onPressed: () => starNowController.startNow(),
                         child: Text(
                           AppLocalizations.of(context)!.welcomeFirstButton,
                           style: Theme.of(context).textTheme.bodyLarge,
