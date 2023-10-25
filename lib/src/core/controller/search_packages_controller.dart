@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/data/models/packages_model.dart';
-import '../../../../core/data/repositories/search_packages/search_packages_repository.dart';
+import '../data/repositories/search_packages/search_packages_repository.dart';
+import 'states/search_packages_states.dart';
 
 class SearchPackagesController extends ValueNotifier<SearchPackagesState> {
   final SearchPackagesRepository searchRepository;
@@ -31,17 +31,3 @@ class SearchPackagesController extends ValueNotifier<SearchPackagesState> {
     value = state;
   }
 }
-
-abstract interface class SearchPackagesState {}
-
-final class IdleSearchPackagesState extends SearchPackagesState {}
-
-final class LoadingSearchPackagesState extends SearchPackagesState {}
-
-final class LoadedSearchPackagesState extends SearchPackagesState {
-  final PackagesModel packagesModel;
-
-  LoadedSearchPackagesState({required this.packagesModel});
-}
-
-final class ErrorSearchPackagesState extends SearchPackagesState {}

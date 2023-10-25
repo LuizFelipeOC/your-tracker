@@ -11,5 +11,8 @@
     "firstErrorGetPackage": "O código informado está vazio!",
     "secondErrorGetPackage": "O código informado está inválido!",
     "thirdErrorErrorGetPackage": "O objeto ainda não foi inserido na base de dados do correio",
-    "idleTrackerState":"Digite o código de rastreamento e localize seu pedido"
+    "idleTrackerState":"Digite o código de rastreamento e localize seu pedido",
+    "searchingStartNowTitle": "Pesquisar pacote",
+    "favoriteYourPackage": "Favoritar pacote"
+
 }

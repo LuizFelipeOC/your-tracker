@@ -1,16 +1,21 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/themes/app_colors.dart';
-import '../controller/search_packages_controller.dart';
-import 'card_tracking_packages.dart';
+import '../../controller/search_packages_controller.dart';
+import '../../controller/states/search_packages_states.dart';
 import 'erros_searchs_packages/error_search_packages_informations.dart';
+import '../../themes/app_colors.dart';
+import 'card_tracking_packages.dart';
 import 'loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
+  final bool isStarnedNow;
+
   const ModalSearchPackges({
     super.key,
+    required this.isStarnedNow,
   });
 
   @override
@@ -31,10 +36,15 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  AppLocalizations.of(context)!.simpleSearch,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
+                child: widget.isStarnedNow
+                    ? Text(
+                        AppLocalizations.of(context)!.searchingStartNowTitle,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      )
+                    : Text(
+                        AppLocalizations.of(context)!.simpleSearch,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
               ),
               InkWell(
                 overlayColor: MaterialStatePropertyAll(AppColors.grey.withOpacity(0.1)),
@@ -63,6 +73,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                   cursorColor: AppColors.secondaryColor,
                   onChanged: (value) async {
                     if (value.length >= 13) {
+                      FocusScope.of(context).unfocus();
                       await searchPackagesStore.searchPackage();
                     }
                   },
@@ -77,7 +88,10 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               SizedBox(
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () async => await searchPackagesStore.searchPackage(),
+                  onPressed: () async => {
+                    FocusScope.of(context).unfocus(),
+                    await searchPackagesStore.searchPackage(),
+                  },
                   child: const Icon(
                     Icons.search,
                   ),
@@ -91,25 +105,48 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
             valueListenable: searchPackagesStore,
             builder: (ctx, state, _) {
               if (state is LoadedSearchPackagesState) {
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: state.packagesModel.eventos.length,
-                  itemBuilder: (context, index) {
-                    final items = state.packagesModel.eventos[index];
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        reverse: true,
+                        dragStartBehavior: DragStartBehavior.start,
+                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 60),
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: state.packagesModel.eventos.length,
+                        itemBuilder: (context, index) {
+                          final items = state.packagesModel.eventos[index];
 
-                    return Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: CardTrackingPackages(
-                        items: items,
+                          return Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: CardTrackingPackages(
+                              items: items,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: FloatingActionButton.extended(
+                          onPressed: () {},
+                          label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
+                          icon: const Icon(Icons.star),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
 
               if (state is LoadingSearchPackagesState) {
-                return const LoadingSearchPackages();
+                return LoadingSearchPackages(
+                  title: AppLocalizations.of(context)!.searchingPackage,
+                );
               }
 
               if (state is ErrorSearchPackagesState) {
@@ -130,7 +167,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               );
             },
           ),
-        )
+        ),
       ],
     );
   }

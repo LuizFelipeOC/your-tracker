@@ -11,6 +11,7 @@
     "firstErrorGetPackage": "The provided code is empty!",
     "secondErrorGetPackage": "The provided code is invalid!",
     "thirdErrorErrorGetPackage": "The item hasn't been added to the courier's database yet",
-    "idleTrackerState":"Enter the tracking code and locate your order"
-
+    "idleTrackerState":"Enter the tracking code and locate your order",
+    "searchingStartNowTitle": "Search Package",
+    "favoriteYourPackage": "Favorite order"
 }

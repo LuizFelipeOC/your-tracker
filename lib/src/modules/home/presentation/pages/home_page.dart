@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/data/models/packages_model.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/app_images.dart';
-import '../../../welcome/presentation/widgets/modal_seach_packages.dart';
+import '../../../../core/widgets/modal_search_packages/modal_seach_packages.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              builder: (_) => const ModalSearchPackges(),
+              builder: (_) => const ModalSearchPackges(isStarnedNow: true),
             );
 
             if (object == null) {
