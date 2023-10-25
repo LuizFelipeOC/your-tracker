@@ -109,7 +109,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                           ),
                           context: context,
-                          builder: (ctx) => const ModalSearchPackges(),
+                          builder: (ctx) => const ModalSearchPackges(isStarnedNow: false),
                         );
                       },
                       child: Text(
