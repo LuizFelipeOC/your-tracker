@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/themes/app_colors.dart';
-import '../controller/search_packages_controller.dart';
-import 'card_tracking_packages.dart';
+import '../../controller/search_packages_controller.dart';
+import '../../controller/states/search_packages_states.dart';
 import 'erros_searchs_packages/error_search_packages_informations.dart';
+import '../../themes/app_colors.dart';
+import 'card_tracking_packages.dart';
 import 'loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {

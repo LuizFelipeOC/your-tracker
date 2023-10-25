@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/data/models/events_model.dart';
-import '../../../../core/themes/app_colors.dart';
+import '../../data/models/events_model.dart';
+import '../../themes/app_colors.dart';
 
 class CardTrackingPackages extends StatelessWidget {
   const CardTrackingPackages({
