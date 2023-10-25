@@ -30,6 +30,11 @@ class CardTrackingPackages extends StatelessWidget {
           children: [
             Text(
               items.status,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 5),
+            Text(
+              items.local,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             ListView.builder(
