@@ -35,8 +35,9 @@ class CardTrackingPackages extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               items.local,
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
+            const SizedBox(height: 5),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
