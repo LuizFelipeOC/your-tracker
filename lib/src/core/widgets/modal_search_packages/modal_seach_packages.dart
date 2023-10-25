@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -72,6 +73,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                   cursorColor: AppColors.secondaryColor,
                   onChanged: (value) async {
                     if (value.length >= 13) {
+                      FocusScope.of(context).unfocus();
                       await searchPackagesStore.searchPackage();
                     }
                   },
@@ -86,7 +88,10 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               SizedBox(
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () async => await searchPackagesStore.searchPackage(),
+                  onPressed: () async => {
+                    FocusScope.of(context).unfocus(),
+                    await searchPackagesStore.searchPackage(),
+                  },
                   child: const Icon(
                     Icons.search,
                   ),
@@ -103,15 +108,11 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(AppLocalizations.of(context)!.favoriteYourPackage),
-                      ),
-                    ),
                     Expanded(
                       child: ListView.builder(
+                        reverse: true,
+                        dragStartBehavior: DragStartBehavior.start,
+                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                         padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 60),
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: state.packagesModel.eventos.length,
@@ -127,12 +128,25 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                         },
                       ),
                     ),
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: FloatingActionButton.extended(
+                          onPressed: () {},
+                          label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
+                          icon: const Icon(Icons.star),
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }
 
               if (state is LoadingSearchPackagesState) {
-                return const LoadingSearchPackages();
+                return LoadingSearchPackages(
+                  title: AppLocalizations.of(context)!.searchingPackage,
+                );
               }
 
               if (state is ErrorSearchPackagesState) {
