@@ -8,7 +8,7 @@ import '../../controller/states/search_packages_states.dart';
 import 'erros_searchs_packages/error_search_packages_informations.dart';
 import '../../themes/app_colors.dart';
 import 'card_tracking_packages.dart';
-import 'states_widgets/favorited_packages.dart';
+import 'states_widgets/favorited_message_packages.dart';
 import 'states_widgets/loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
