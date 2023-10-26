@@ -1,13 +1,21 @@
+import 'dart:convert';
+
 import 'package:result_dart/result_dart.dart';
 
 import '../../../services/http/http.dart';
+import '../../../services/local_storage/local_storage_dart.dart';
 import '../../models/packages_model.dart';
 import 'packages_interface.dart';
+import 'results/search_package_results.dart';
 
 class SearchPackagesRepository implements IPackges {
   final IHttpService http;
+  final ILocalStorage localStorage;
 
-  SearchPackagesRepository({required this.http});
+  List<PackagesModel> packages = <PackagesModel>[];
+  List<Map<String, dynamic>> listOfObjects = [];
+
+  SearchPackagesRepository({required this.http, required this.localStorage});
 
   @override
   AsyncResult<SuccessPackages, FailurePackages> get({required String packCode}) async {
@@ -31,8 +39,50 @@ class SearchPackagesRepository implements IPackges {
     return Success(SuccessPackages(packages: packages));
   }
 
+  @override
+  AsyncResult<SuccessFavoritePackage, FailureFavoritePackage> favorite({required PackagesModel package}) async {
+    try {
+      final verifyPackagesCache = await localStorage.read(key: 'favorite_packages');
+
+      if (verifyPackagesCache.isError()) {
+        final mountObject = package.toMap();
+
+        listOfObjects.add(mountObject);
+
+        final moutendPakcage = PackagesModel.fromMap(mountObject);
+        packages.add(moutendPakcage);
+
+        await localStorage.save(key: 'favorite_packages', value: jsonEncode(listOfObjects));
+
+        return Success(SuccessFavoritePackage(list: packages));
+      }
+
+      verifyPackagesCache.onSuccess((success) {
+        final transformList = _transformCacheValue(data: success.data);
+
+        packages.clear();
+        packages.addAll(transformList);
+      });
+
+      for (var items in packages) {
+        listOfObjects.add(items.toMap());
+      }
+
+      await localStorage.save(key: 'favorite_packages', value: jsonEncode(listOfObjects));
+      return Success(SuccessFavoritePackage(list: packages));
+    } catch (_) {
+      return Failure(FailureFavoritePackage(message: 'Ocurr an exception when: ${_.toString()} in favorite package'));
+    }
+  }
+
   PackagesModel _transformPackagesList({required data}) {
     final transformInObject = PackagesModel.fromMap(data);
     return transformInObject;
+  }
+
+  List<PackagesModel> _transformCacheValue({required data}) {
+    final decodingData = jsonDecode(data) as List<dynamic>;
+
+    return decodingData.map((e) => PackagesModel.fromMap(e)).toList();
   }
 }

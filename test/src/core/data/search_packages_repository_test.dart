@@ -1,19 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:result_dart/result_dart.dart';
+import 'package:your_tracker/src/core/data/models/packages_model.dart';
 import 'package:your_tracker/src/core/data/repositories/search_packages/search_packages_repository.dart';
 import 'package:your_tracker/src/core/services/http/http.dart';
 import 'package:your_tracker/src/core/services/http/uno.dart';
+import 'package:your_tracker/src/core/services/local_storage/flutter_secure_storage.dart';
+import 'package:your_tracker/src/core/services/local_storage/local_storage_dart.dart';
 
 class UnoServiceMock extends Mock implements UnoService {}
 
+class SecureCacheMock extends Mock implements FlutterSecureStorageService {}
+
 void main() {
   late UnoService unoService;
+  late FlutterSecureStorageService localStorage;
   late SearchPackagesRepository repository;
 
   setUp(() {
     unoService = UnoServiceMock();
-    repository = SearchPackagesRepository(http: unoService);
+    localStorage = SecureCacheMock();
+    repository = SearchPackagesRepository(http: unoService, localStorage: localStorage);
   });
 
   group('Should test all success cases ', () {
@@ -67,6 +76,56 @@ void main() {
       });
     });
   });
+
+  group('Should teste favorite package', () {
+    final model = PackagesModel.fromMap(responseEvents);
+    final mountObject = model.toMap();
+
+    final List<Map<String, dynamic>> listObject = [mountObject];
+    final List<Map<String, dynamic>> listTwoObject = [mountObject, mountObject];
+
+    test('when cache is empty', () async {
+      when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
+        (_) async => Failure(
+          FailureReadData(message: 'This input is empty or key: favorite_packages dont exist'),
+        ),
+      );
+
+      when(() => localStorage.save(key: 'favorite_packages', value: jsonEncode(listObject))).thenAnswer(
+        (_) async => Success(SuccessSaveData()),
+      );
+
+      final result = await repository.favorite(package: model);
+
+      expect(result.isSuccess(), isTrue);
+
+      result.onSuccess((success) {
+        expect(success.list.length, 1);
+      });
+    });
+
+    test('when cache is value', () async {
+      final model = PackagesModel.fromMap(responseEvents);
+
+      when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
+        (_) async => Success(
+          SuccessReadData(data: responseEventsString),
+        ),
+      );
+
+      when(() => localStorage.save(key: 'favorite_packages', value: jsonEncode(listTwoObject))).thenAnswer(
+        (_) async => Success(SuccessSaveData()),
+      );
+
+      final result = await repository.favorite(package: model);
+
+      expect(result.isSuccess(), isTrue);
+
+      result.onSuccess((success) {
+        expect(success.list.length, 2);
+      });
+    });
+  });
 }
 
 const responseEvents = {
@@ -89,5 +148,9 @@ const responseEvents = {
     }
   ]
 };
+
+const responseEventsString = '''
+[{"codigo":"NL717798416BR","eventos":[{"data":"08/08/2023","hora":"11:35:24","local":"VARZEA GRANDE - MT","status":"Objeto entregue ao destinatário","subStatus":[""]},{"data":"08/08/2023","hora":"11:34:57","local":"VARZEA GRANDE - MT","status":"Objeto saiu para entrega ao destinatário","subStatus":[""]}]}, {"codigo":"NL717798416BR","eventos":[{"data":"08/08/2023","hora":"11:35:24","local":"VARZEA GRANDE - MT","status":"Objeto entregue ao destinatário","subStatus":[""]},{"data":"08/08/2023","hora":"11:34:57","local":"VARZEA GRANDE - MT","status":"Objeto saiu para entrega ao destinatário","subStatus":[""]}]}]
+''';
 
 const responseEventsEmpty = {"codigo": "NL717798416BR", "host": "yi", "eventos": []};
