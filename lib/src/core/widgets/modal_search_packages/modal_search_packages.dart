@@ -176,7 +176,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                           height: 46,
                           child: ElevatedButton(
                             onPressed: () {
-                              searchPackagesStore.value = IdleSearchPackagesState();
+                              searchPackagesStore.resetState();
                             },
                             child: const Text('Continuar buscas'),
                           ),
@@ -192,7 +192,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                           height: 46,
                           child: TextButton(
                             onPressed: () {
-                              Modular.to.pop();
+                              Modular.to.pop(state.package);
                               searchPackagesStore.resetState();
                             },
                             child: Text(

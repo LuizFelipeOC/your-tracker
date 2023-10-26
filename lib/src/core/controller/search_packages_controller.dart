@@ -31,7 +31,7 @@ class SearchPackagesController extends ValueNotifier<SearchPackagesState> {
     final result = await searchRepository.favorite(package: package);
 
     result.onSuccess((success) {
-      _emit(state: SuccessFavoriteState());
+      _emit(state: SuccessFavoriteState(package: package));
     });
 
     result.onFailure((failure) {
