@@ -70,8 +70,8 @@ class SearchPackagesRepository implements IPackges {
         }
 
         transformList.add(package);
-
         packages.addAll(transformList);
+        haveErrorInSavement = false;
       });
 
       if (haveErrorInSavement) {
