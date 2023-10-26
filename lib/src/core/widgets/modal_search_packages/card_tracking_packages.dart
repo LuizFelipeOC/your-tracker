@@ -37,19 +37,6 @@ class CardTrackingPackages extends StatelessWidget {
               items.local,
               style: Theme.of(context).textTheme.labelMedium,
             ),
-            const SizedBox(height: 5),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: items.subStatus?.length,
-              itemBuilder: (ctx, idx) {
-                final subEvents = items.subStatus?[idx];
-                return Text(
-                  subEvents.toString().replaceAll('[', '').replaceAll(']', ''),
-                  style: Theme.of(context).textTheme.labelMedium,
-                );
-              },
-            ),
             Container(
               alignment: Alignment.bottomRight,
               child: Text(

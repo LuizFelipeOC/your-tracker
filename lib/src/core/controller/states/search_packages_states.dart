@@ -13,3 +13,13 @@ final class LoadedSearchPackagesState extends SearchPackagesState {
 }
 
 final class ErrorSearchPackagesState extends SearchPackagesState {}
+
+final class LoadingFavoriteState extends SearchPackagesState {}
+
+final class SuccessFavoriteState extends SearchPackagesState {}
+
+final class ErrorFavoriteState extends SearchPackagesState {
+  String message;
+
+  ErrorFavoriteState({required this.message});
+}

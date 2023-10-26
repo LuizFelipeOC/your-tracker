@@ -8,7 +8,8 @@ import '../../controller/states/search_packages_states.dart';
 import 'erros_searchs_packages/error_search_packages_informations.dart';
 import '../../themes/app_colors.dart';
 import 'card_tracking_packages.dart';
-import 'loading_search_packages.dart';
+import 'states_widgets/favorited_packages.dart';
+import 'states_widgets/loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   final bool isStarnedNow;
@@ -104,6 +105,18 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
           child: ValueListenableBuilder(
             valueListenable: searchPackagesStore,
             builder: (ctx, state, _) {
+              if (state is LoadingSearchPackagesState) {
+                return LoadingSearchPackages(
+                  title: AppLocalizations.of(context)!.searchingPackage,
+                );
+              }
+
+              if (state is ErrorSearchPackagesState) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  child: ErrorSearchPackageInformations(),
+                );
+              }
               if (state is LoadedSearchPackagesState) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -131,9 +144,11 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                     Container(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Modular.to.pop(state.packagesModel);
+                        },
                         child: FloatingActionButton.extended(
-                          onPressed: () {},
+                          onPressed: () => searchPackagesStore.favoritePackages(package: state.packagesModel),
                           label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
                           icon: const Icon(Icons.star),
                         ),
@@ -143,16 +158,101 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                 );
               }
 
-              if (state is LoadingSearchPackagesState) {
-                return LoadingSearchPackages(
-                  title: AppLocalizations.of(context)!.searchingPackage,
+              if (state is LoadingFavoriteState) {
+                return const LoadingSearchPackages(
+                  title: 'Salvando o pacote, aguarde um momento!',
                 );
               }
 
-              if (state is ErrorSearchPackagesState) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                  child: ErrorSearchPackageInformations(),
+              if (state is SuccessFavoriteState) {
+                return FavoritedMessagePackage(
+                  title: 'O pacote foi salvo com sucesso!',
+                  iconColor: AppColors.green,
+                  iconData: Icons.check_circle_rounded,
+                  controller: searchPackagesStore,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+                        width: MediaQuery.of(context).size.width,
+                        child: SizedBox(
+                          height: 46,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              searchPackagesStore.value = IdleSearchPackagesState();
+                            },
+                            child: const Text('Continuar buscas'),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(AppLocalizations.of(context)!.or),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: SizedBox(
+                          height: 46,
+                          child: TextButton(
+                            onPressed: () {
+                              Modular.to.pop();
+                              searchPackagesStore.resetState();
+                            },
+                            child: Text(
+                              'Fechar',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              if (state is ErrorFavoriteState) {
+                return FavoritedMessagePackage(
+                  title: state.message == 'Already exist track code' ? 'Não pode salvar um pacote já salvo' : 'Ocorreu um erro ao salvar o pacote!',
+                  iconColor: AppColors.red,
+                  iconData: Icons.error_sharp,
+                  controller: searchPackagesStore,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+                        width: MediaQuery.of(context).size.width,
+                        child: SizedBox(
+                          height: 46,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              searchPackagesStore.searchPackage();
+                            },
+                            child: const Text('Tentar novamente'),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(AppLocalizations.of(context)!.or),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: SizedBox(
+                          height: 46,
+                          child: TextButton(
+                            onPressed: () {
+                              Modular.to.pop();
+                              searchPackagesStore.resetState();
+                            },
+                            child: Text(
+                              'Fechar',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               }
 

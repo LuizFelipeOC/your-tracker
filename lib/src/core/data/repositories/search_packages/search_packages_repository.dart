@@ -15,6 +15,8 @@ class SearchPackagesRepository implements IPackges {
   List<PackagesModel> packages = <PackagesModel>[];
   List<Map<String, dynamic>> listOfObjects = [];
 
+  bool haveErrorInSavement = false;
+
   SearchPackagesRepository({required this.http, required this.localStorage});
 
   @override
@@ -60,9 +62,21 @@ class SearchPackagesRepository implements IPackges {
       verifyPackagesCache.onSuccess((success) {
         final transformList = _transformCacheValue(data: success.data);
 
-        packages.clear();
+        final alreadyExist = transformList.indexWhere((e) => e.codigo == package.codigo);
+
+        if (alreadyExist >= 0) {
+          haveErrorInSavement = true;
+          return;
+        }
+
+        transformList.add(package);
+
         packages.addAll(transformList);
       });
+
+      if (haveErrorInSavement) {
+        return Failure(FailureFavoritePackage(message: 'Already exist track code'));
+      }
 
       for (var items in packages) {
         listOfObjects.add(items.toMap());
