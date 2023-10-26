@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -119,21 +118,18 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               }
               if (state is LoadedSearchPackagesState) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        reverse: true,
-                        dragStartBehavior: DragStartBehavior.start,
                         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                        padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 60),
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: state.packagesModel.eventos.length,
                         itemBuilder: (context, index) {
                           final items = state.packagesModel.eventos[index];
 
                           return Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(8),
                             child: CardTrackingPackages(
                               items: items,
                             ),
@@ -142,7 +138,8 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(bottom: 20),
+                      alignment: Alignment.bottomRight,
+                      padding: const EdgeInsets.only(bottom: 30, left: 20, right: 20),
                       child: TextButton(
                         onPressed: () {
                           Modular.to.pop(state.packagesModel);
