@@ -79,10 +79,12 @@ void main() {
 
   group('Should teste favorite package', () {
     final model = PackagesModel.fromMap(responseEvents);
+    final model2 = PackagesModel.fromMap(newResponseEvents);
     final mountObject = model.toMap();
+    final mountObject2 = model2.toMap();
 
     final List<Map<String, dynamic>> listObject = [mountObject];
-    final List<Map<String, dynamic>> listTwoObject = [mountObject, mountObject];
+    List<Map<String, dynamic>> listTwoObject = [mountObject, mountObject2];
 
     test('when cache is empty', () async {
       when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
@@ -105,7 +107,7 @@ void main() {
     });
 
     test('when cache is value', () async {
-      final model = PackagesModel.fromMap(responseEvents);
+      final model = PackagesModel.fromMap(newResponseEvents);
 
       when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
         (_) async => Success(
@@ -123,6 +125,28 @@ void main() {
 
       result.onSuccess((success) {
         expect(success.list.length, 2);
+      });
+    });
+
+    test('when try save duplicate tracking code', () async {
+      final model = PackagesModel.fromMap(responseEvents);
+
+      when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
+        (_) async => Success(
+          SuccessReadData(data: responseEventsString),
+        ),
+      );
+
+      when(() => localStorage.save(key: 'favorite_packages', value: jsonEncode(listTwoObject))).thenAnswer(
+        (_) async => Success(SuccessSaveData()),
+      );
+
+      final result = await repository.favorite(package: model);
+
+      expect(result.isSuccess(), isFalse);
+
+      result.onFailure((failure) {
+        expect(failure.message, 'Already exist track code');
       });
     });
   });
@@ -149,8 +173,29 @@ const responseEvents = {
   ]
 };
 
+const newResponseEvents = {
+  "codigo": "NL717798418BR",
+  "host": "yi",
+  "eventos": [
+    {
+      "data": "08/08/2023",
+      "hora": "11:35:24",
+      "local": "VARZEA GRANDE - MT",
+      "status": "Objeto entregue ao destinatário",
+      "subStatus": [""]
+    },
+    {
+      "data": "08/08/2023",
+      "hora": "11:34:57",
+      "local": "VARZEA GRANDE - MT",
+      "status": "Objeto saiu para entrega ao destinatário",
+      "subStatus": [""]
+    }
+  ]
+};
+
 const responseEventsString = '''
-[{"codigo":"NL717798416BR","eventos":[{"data":"08/08/2023","hora":"11:35:24","local":"VARZEA GRANDE - MT","status":"Objeto entregue ao destinatário","subStatus":[""]},{"data":"08/08/2023","hora":"11:34:57","local":"VARZEA GRANDE - MT","status":"Objeto saiu para entrega ao destinatário","subStatus":[""]}]}, {"codigo":"NL717798416BR","eventos":[{"data":"08/08/2023","hora":"11:35:24","local":"VARZEA GRANDE - MT","status":"Objeto entregue ao destinatário","subStatus":[""]},{"data":"08/08/2023","hora":"11:34:57","local":"VARZEA GRANDE - MT","status":"Objeto saiu para entrega ao destinatário","subStatus":[""]}]}]
+[{"codigo":"NL717798416BR","eventos":[{"data":"08/08/2023","hora":"11:35:24","local":"VARZEA GRANDE - MT","status":"Objeto entregue ao destinatário","subStatus":[""]},{"data":"08/08/2023","hora":"11:34:57","local":"VARZEA GRANDE - MT","status":"Objeto saiu para entrega ao destinatário","subStatus":[""]}]}]
 ''';
 
 const responseEventsEmpty = {"codigo": "NL717798416BR", "host": "yi", "eventos": []};
