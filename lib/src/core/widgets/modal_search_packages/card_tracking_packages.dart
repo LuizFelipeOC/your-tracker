@@ -29,35 +29,21 @@ class CardTrackingPackages extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              items.status,
-              style: Theme.of(context).textTheme.bodyMedium,
+              items.data,
+              style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.end,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              items.local,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 5),
             Text(
-              items.local,
-              style: Theme.of(context).textTheme.labelMedium,
+              items.status,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 5),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: items.subStatus?.length,
-              itemBuilder: (ctx, idx) {
-                final subEvents = items.subStatus?[idx];
-                return Text(
-                  subEvents.toString().replaceAll('[', '').replaceAll(']', ''),
-                  style: Theme.of(context).textTheme.labelMedium,
-                );
-              },
-            ),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: Text(
-                '${items.data}  ${items.hora}',
-                style: Theme.of(context).textTheme.labelMedium,
-                textAlign: TextAlign.end,
-              ),
-            ),
           ],
         ),
       ),

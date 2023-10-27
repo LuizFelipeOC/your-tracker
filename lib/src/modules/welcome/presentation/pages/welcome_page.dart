@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/themes/app_images.dart';
-import '../../../../core/widgets/modal_search_packages/modal_seach_packages.dart';
+import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 import '../controller/start_now_controller.dart';
 import '../states/start_now_state.dart';
 

@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,7 +7,8 @@ import '../../controller/states/search_packages_states.dart';
 import 'erros_searchs_packages/error_search_packages_informations.dart';
 import '../../themes/app_colors.dart';
 import 'card_tracking_packages.dart';
-import 'loading_search_packages.dart';
+import 'states_widgets/favorited_message_packages.dart';
+import 'states_widgets/loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   final bool isStarnedNow;
@@ -104,45 +104,6 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
           child: ValueListenableBuilder(
             valueListenable: searchPackagesStore,
             builder: (ctx, state, _) {
-              if (state is LoadedSearchPackagesState) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        reverse: true,
-                        dragStartBehavior: DragStartBehavior.start,
-                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                        padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 60),
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: state.packagesModel.eventos.length,
-                        itemBuilder: (context, index) {
-                          final items = state.packagesModel.eventos[index];
-
-                          return Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: CardTrackingPackages(
-                              items: items,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: FloatingActionButton.extended(
-                          onPressed: () {},
-                          label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
-                          icon: const Icon(Icons.star),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }
-
               if (state is LoadingSearchPackagesState) {
                 return LoadingSearchPackages(
                   title: AppLocalizations.of(context)!.searchingPackage,
@@ -153,6 +114,142 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                 return const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: ErrorSearchPackageInformations(),
+                );
+              }
+              if (state is LoadedSearchPackagesState) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: state.packagesModel.eventos.length,
+                        itemBuilder: (context, index) {
+                          final items = state.packagesModel.eventos[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: CardTrackingPackages(
+                              items: items,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.bottomRight,
+                      padding: const EdgeInsets.only(bottom: 30, left: 20, right: 20),
+                      child: TextButton(
+                        onPressed: () {
+                          Modular.to.pop(state.packagesModel);
+                        },
+                        child: FloatingActionButton.extended(
+                          onPressed: () => searchPackagesStore.favoritePackages(package: state.packagesModel),
+                          label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
+                          icon: const Icon(Icons.star),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }
+
+              if (state is LoadingFavoriteState) {
+                return const LoadingSearchPackages(
+                  title: 'Salvando o pacote, aguarde um momento!',
+                );
+              }
+
+              if (state is SuccessFavoriteState) {
+                return FavoritedMessagePackage(
+                  title: 'O pacote foi salvo com sucesso!',
+                  iconColor: AppColors.green,
+                  iconData: Icons.check_circle_rounded,
+                  controller: searchPackagesStore,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+                        width: MediaQuery.of(context).size.width,
+                        child: SizedBox(
+                          height: 46,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              searchPackagesStore.resetState();
+                            },
+                            child: const Text('Continuar buscas'),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(AppLocalizations.of(context)!.or),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: SizedBox(
+                          height: 46,
+                          child: TextButton(
+                            onPressed: () {
+                              Modular.to.pop(state.package);
+                              searchPackagesStore.resetState();
+                            },
+                            child: Text(
+                              'Fechar',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              if (state is ErrorFavoriteState) {
+                return FavoritedMessagePackage(
+                  title: state.message == 'Already exist track code' ? 'Não pode salvar um pacote já salvo' : 'Ocorreu um erro ao salvar o pacote!',
+                  iconColor: AppColors.red,
+                  iconData: Icons.error_sharp,
+                  controller: searchPackagesStore,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+                        width: MediaQuery.of(context).size.width,
+                        child: SizedBox(
+                          height: 46,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              searchPackagesStore.searchPackage();
+                            },
+                            child: const Text('Tentar novamente'),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(AppLocalizations.of(context)!.or),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: SizedBox(
+                          height: 46,
+                          child: TextButton(
+                            onPressed: () {
+                              Modular.to.pop();
+                              searchPackagesStore.resetState();
+                            },
+                            child: Text(
+                              'Fechar',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               }
 

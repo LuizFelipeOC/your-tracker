@@ -86,6 +86,7 @@ final class ThemeApp {
         ),
         headlineMedium: TextStyle(
           color: AppColors.primaryColor,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
         headlineSmall: TextStyle(
