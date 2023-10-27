@@ -60,9 +60,9 @@ class _HomePageState extends State<HomePage> {
                   valueListenable: homeStore,
                   builder: (ctx, state, _) {
                     if (state is LoadingHomeState) {
-                      return const Center(
+                      return Center(
                         child: LoadingSearchPackages(
-                          title: 'Buscando seus pacotes',
+                          title: AppLocalizations.of(context)!.loadingMyPackages,
                         ),
                       );
                     }
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Ocorreu um erro ao tentar buscar os pacotes, tente novamente mais tarde',
+                              AppLocalizations.of(context)!.errorHomeItems,
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           ],
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
-                                  'Você ainda não adicionou nenhum item na lista ',
+                                  AppLocalizations.of(context)!.emptyHomeItems,
                                   style: Theme.of(context).textTheme.headlineMedium,
                                   textAlign: TextAlign.center,
                                 ),
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
 
             homeStore.addPackageInList(packages: object);
           },
-          label: const Text('ADD NEW PACKAGE'),
+          label: Text(AppLocalizations.of(context)!.buttonHomeAddCode),
         ),
       ),
     );
