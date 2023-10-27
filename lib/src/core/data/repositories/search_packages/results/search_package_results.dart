@@ -23,3 +23,15 @@ class FailureFavoritePackage {
 
   FailureFavoritePackage({required this.message});
 }
+
+final class SuccesseGetAllPackages {
+  final List<PackagesModel> list;
+
+  SuccesseGetAllPackages({required this.list});
+}
+
+final class FailureeGetAllPackages {
+  final String message;
+
+  FailureeGetAllPackages({required this.message});
+}
