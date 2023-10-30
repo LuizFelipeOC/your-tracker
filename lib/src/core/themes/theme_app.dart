@@ -14,7 +14,7 @@ final class ThemeApp {
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryColor,
         ),
-        splashColor: AppColors.primaryColor,
+        splashColor: AppColors.secondaryColor,
         brightness: Brightness.light,
         primaryColor: AppColors.primaryColor,
       );

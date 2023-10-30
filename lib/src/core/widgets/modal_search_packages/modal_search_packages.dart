@@ -156,14 +156,14 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
               }
 
               if (state is LoadingFavoriteState) {
-                return const LoadingSearchPackages(
-                  title: 'Salvando o pacote, aguarde um momento!',
+                return LoadingSearchPackages(
+                  title: AppLocalizations.of(context)!.loadingFavorited,
                 );
               }
 
               if (state is SuccessFavoriteState) {
                 return FavoritedMessagePackage(
-                  title: 'O pacote foi salvo com sucesso!',
+                  title: AppLocalizations.of(context)!.successfulFavorited,
                   iconColor: AppColors.green,
                   iconData: Icons.check_circle_rounded,
                   controller: searchPackagesStore,
@@ -178,7 +178,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                             onPressed: () {
                               searchPackagesStore.resetState();
                             },
-                            child: const Text('Continuar buscas'),
+                            child: Text(AppLocalizations.of(context)!.continueSearch),
                           ),
                         ),
                       ),
@@ -196,7 +196,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                               searchPackagesStore.resetState();
                             },
                             child: Text(
-                              'Fechar',
+                              AppLocalizations.of(context)!.close,
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                           ),
@@ -209,7 +209,7 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
 
               if (state is ErrorFavoriteState) {
                 return FavoritedMessagePackage(
-                  title: state.message == 'Already exist track code' ? 'Não pode salvar um pacote já salvo' : 'Ocorreu um erro ao salvar o pacote!',
+                  title: state.message == 'Already exist track code' ? AppLocalizations.of(context)!.alreadyExistCode : AppLocalizations.of(context)!.occurErrorSavePackage,
                   iconColor: AppColors.red,
                   iconData: Icons.error_sharp,
                   controller: searchPackagesStore,

@@ -13,10 +13,10 @@ final class WelcomeModule extends Module {
 
   @override
   void binds(Injector i) {
-    i.addLazySingleton(SearchPackagesRepository.new);
-    i.addLazySingleton(SearchPackagesController.new);
-    i.addLazySingleton(WelcomeRepository.new);
-    i.addLazySingleton(StartNowController.new);
+    i.add(SearchPackagesRepository.new);
+    i.add(SearchPackagesController.new);
+    i.add(WelcomeRepository.new);
+    i.add(StartNowController.new);
     super.binds(i);
   }
 

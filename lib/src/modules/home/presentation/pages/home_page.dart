@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:your_tracker/src/core/themes/app_colors.dart';
+import 'package:your_tracker/src/core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 
 import '../../../../core/data/models/packages_model.dart';
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/app_images.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
+import '../controller/home_controller.dart';
+import '../widgets/simple_card_tracking.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +17,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final homeStore = Modular.get<HomeController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      homeStore.getAllFavoritePackages();
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
@@ -23,47 +37,92 @@ class _HomePageState extends State<HomePage> {
         child: SizedBox(
           height: screen.height,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text.rich(
-                    TextSpan(
-                      text: AppLocalizations.of(context)!.firstWelcomeText,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: AppLocalizations.of(context)!.secondWelcomeText,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppImage.sadFace,
-                        color: AppColors.primaryColor,
-                        width: screen.width * .15,
+              Container(
+                padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+                alignment: Alignment.centerLeft,
+                child: Text.rich(
+                  TextSpan(
+                    text: AppLocalizations.of(context)!.firstWelcomeText,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: AppLocalizations.of(context)!.secondWelcomeText,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        'Você ainda não adicionou nenhum rastreio!',
-                        textAlign: TextAlign.center,
-                      )
                     ],
                   ),
+                  textAlign: TextAlign.start,
                 ),
               ),
-              Expanded(child: Container())
+              Expanded(
+                child: ValueListenableBuilder(
+                  valueListenable: homeStore,
+                  builder: (ctx, state, _) {
+                    if (state is LoadingHomeState) {
+                      return Center(
+                        child: LoadingSearchPackages(
+                          title: AppLocalizations.of(context)!.loadingMyPackages,
+                        ),
+                      );
+                    }
+
+                    if (state is ErrorHomeState) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.errorHomeItems,
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    if (state is SuccessHomeState) {
+                      if (state.list.isEmpty) {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  AppLocalizations.of(context)!.emptyHomeItems,
+                                  style: Theme.of(context).textTheme.headlineMedium,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
+                      return RefreshIndicator(
+                        backgroundColor: AppColors.white,
+                        color: AppColors.primaryColor,
+                        onRefresh: () => homeStore.getAllFavoritePackages(),
+                        child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: state.list.length,
+                          itemBuilder: (ctx, index) {
+                            final item = state.list[index];
+
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                              child: SimpleCardTracking(item: item),
+                            );
+                          },
+                        ),
+                      );
+                    }
+
+                    return Container();
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -87,8 +146,10 @@ class _HomePageState extends State<HomePage> {
             if (object == null) {
               return;
             }
+
+            homeStore.addPackageInList(packages: object);
           },
-          label: const Text('ADD NEW PACKAGE'),
+          label: Text(AppLocalizations.of(context)!.buttonHomeAddCode),
         ),
       ),
     );

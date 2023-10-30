@@ -89,6 +89,23 @@ class SearchPackagesRepository implements IPackges {
     }
   }
 
+  @override
+  AsyncResult<SuccesseGetAllPackages, FailureeGetAllPackages> getAllCachedPackages() async {
+    List<PackagesModel> list = [];
+
+    final getAllPackagesCache = await localStorage.read(key: 'favorite_packages');
+
+    if (getAllPackagesCache.isError()) {
+      return Failure(FailureeGetAllPackages(message: 'Dont have items in cahced'));
+    }
+
+    getAllPackagesCache.onSuccess((success) {
+      list = _transformCacheValue(data: success.data);
+    });
+
+    return Success(SuccesseGetAllPackages(list: list));
+  }
+
   PackagesModel _transformPackagesList({required data}) {
     final transformInObject = PackagesModel.fromMap(data);
     return transformInObject;
