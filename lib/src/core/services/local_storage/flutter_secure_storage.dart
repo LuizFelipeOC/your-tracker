@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:result_dart/result_dart.dart';
-import 'package:your_tracker/src/core/services/local_storage/local_storage_dart.dart';
+
+import 'local_storage_dart.dart';
 
 class FlutterSecureStorageService implements ILocalStorage {
   FlutterSecureStorage _secureStorageInitialize() {

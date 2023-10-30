@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:your_tracker/src/core/themes/app_colors.dart';
-import 'package:your_tracker/src/core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 
 import '../../../../core/data/models/packages_model.dart';
+import '../../../../core/themes/app_colors.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
+import '../../../../core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 import '../controller/home_controller.dart';
 import '../widgets/simple_card_tracking.dart';
 

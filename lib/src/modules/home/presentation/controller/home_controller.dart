@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:your_tracker/src/core/data/models/packages_model.dart';
-import 'package:your_tracker/src/core/data/repositories/search_packages/packages_interface.dart';
+
+import '../../../../core/data/models/packages_model.dart';
+import '../../../../core/data/repositories/search_packages/packages_interface.dart';
 
 class HomeController extends ValueNotifier<HomeState> {
   final IPackges packges;
