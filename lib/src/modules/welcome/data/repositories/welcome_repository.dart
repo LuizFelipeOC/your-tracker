@@ -1,6 +1,7 @@
 import 'package:result_dart/result_dart.dart';
 
 import '../../../../core/services/local_storage/local_storage_dart.dart';
+import 'welcome_results/welcome_results.dart';
 
 class WelcomeRepository {
   final ILocalStorage localStorage;
@@ -17,7 +18,3 @@ class WelcomeRepository {
     return Failure(FailureStartNow());
   }
 }
-
-final class SuccessStartNow {}
-
-final class FailureStartNow {}

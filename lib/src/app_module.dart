@@ -6,6 +6,7 @@ import 'core/services/http/http.dart';
 import 'core/services/http/uno.dart';
 import 'core/services/local_storage/flutter_secure_storage.dart';
 import 'core/services/local_storage/local_storage_dart.dart';
+import 'core/services/local_storage/shared_preferences_service.dart';
 import 'modules/home/home_module.dart';
 import 'modules/splash/splash_module.dart';
 import 'modules/welcome/welcome_module.dart';
@@ -17,6 +18,7 @@ final class AppModule extends Module {
     i.addLazySingleton<IHttpService>(UnoService.new);
     i.addLazySingleton(FlutterSecureStorage.new);
     i.addLazySingleton<ILocalStorage>(FlutterSecureStorageService.new);
+    i.addLazySingleton(SharedPrefenceService.new);
 
     super.binds(i);
   }

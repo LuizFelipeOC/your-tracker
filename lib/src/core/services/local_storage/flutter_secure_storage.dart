@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:result_dart/result_dart.dart';
-import 'package:your_tracker/src/core/services/local_storage/local_storage_dart.dart';
+
+import 'local_storage_dart.dart';
 
 class FlutterSecureStorageService implements ILocalStorage {
   FlutterSecureStorage _secureStorageInitialize() {
@@ -33,5 +34,18 @@ class FlutterSecureStorageService implements ILocalStorage {
     }
 
     return Failure(FailureReadData(message: 'This input is empty or key: $key dont exist'));
+  }
+
+  @override
+  AsyncResult<SuccessDeleteAll, FailureDeleteAll> deleteAll() async {
+    try {
+      final localStorage = _secureStorageInitialize();
+
+      await localStorage.deleteAll();
+
+      return Success(SuccessDeleteAll(isDeleted: true));
+    } catch (e) {
+      return Failure(FailureDeleteAll(message: 'Ocur error when deleted all cached value $e'));
+    }
   }
 }

@@ -56,4 +56,16 @@ void main() {
       });
     });
   });
+
+  test('should test delete all cached value case not empty', () async {
+    when(() => secureStorage.deleteAll()).thenAnswer((_) async => {});
+
+    final result = await service.deleteAll();
+
+    expect(result.isSuccess(), isTrue);
+
+    result.onSuccess((success) {
+      expect(success.isDeleted, isTrue);
+    });
+  });
 }

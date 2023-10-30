@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:your_tracker/src/core/themes/app_colors.dart';
-import 'package:your_tracker/src/core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 
 import '../../../../core/data/models/packages_model.dart';
+import '../../../../core/themes/app_colors.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
+import '../../../../core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 import '../controller/home_controller.dart';
 import '../widgets/simple_card_tracking.dart';
 
@@ -73,8 +73,9 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.errorHomeItems,
-                              style: Theme.of(context).textTheme.headlineMedium,
+                              state.message == 'Dont have items in cahced' ? AppLocalizations.of(context)!.emptyHomeItems : AppLocalizations.of(context)!.errorHomeItems,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
