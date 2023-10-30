@@ -51,6 +51,7 @@ class _SuccessSavedPackageState extends State<FavoritedMessagePackage> {
           Text(
             widget.title,
             style: Theme.of(context).textTheme.labelLarge,
+            textAlign: TextAlign.center,
           ),
           widget.child ?? const SizedBox(),
         ],
