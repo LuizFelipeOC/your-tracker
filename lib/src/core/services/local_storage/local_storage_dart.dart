@@ -10,7 +10,7 @@ final class SuccessSaveData {}
 final class FailureSaveData {}
 
 final class SuccessReadData {
-  String data;
+  Object data;
 
   SuccessReadData({required this.data});
 }
