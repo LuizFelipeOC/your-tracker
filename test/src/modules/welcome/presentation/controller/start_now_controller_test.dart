@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:your_tracker/src/modules/welcome/data/repositories/welcome_repository.dart';
+import 'package:your_tracker/src/modules/welcome/data/repositories/welcome_results/welcome_results.dart';
 import 'package:your_tracker/src/modules/welcome/presentation/controller/start_now_controller.dart';
 import 'package:your_tracker/src/modules/welcome/presentation/states/start_now_state.dart';
 
