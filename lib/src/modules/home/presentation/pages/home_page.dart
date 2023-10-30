@@ -73,8 +73,9 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.errorHomeItems,
-                              style: Theme.of(context).textTheme.headlineMedium,
+                              state.message == 'Dont have items in cahced' ? AppLocalizations.of(context)!.emptyHomeItems : AppLocalizations.of(context)!.errorHomeItems,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),

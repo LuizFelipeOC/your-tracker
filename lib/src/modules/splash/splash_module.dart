@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../app_module.dart';
+import '../../core/data/repositories/check_first_run_app/first_run_app_repository.dart';
 import 'data/repositories/splash_repository.dart';
 import 'presentation/controller/splash_controller.dart';
 import 'presentation/pages/splash_page.dart';
@@ -11,8 +12,10 @@ class SplashModules extends Module {
 
   @override
   void binds(Injector i) {
-    i.addLazySingleton(SplashRepository.new);
-    i.addLazySingleton(SplashController.new);
+    i.add(SplashRepository.new);
+    i.add(SplashController.new);
+    i.add(CheckFirstRunApp.new);
+
     super.binds(i);
   }
 
