@@ -19,4 +19,7 @@ class SharedPrefenceService implements ILocalStorage {
 
   @override
   AsyncResult<SuccessSaveData, FailureSaveData> save({required String key, required value}) => throw UnimplementedError();
+
+  @override
+  AsyncResult<SuccessDeleteAll, FailureDeleteAll> deleteAll() => throw UnimplementedError();
 }
