@@ -7,6 +7,7 @@ import '../../../../core/themes/app_colors.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 import '../../../../core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 import '../controller/home_controller.dart';
+import '../controller/states/home_state.dart';
 import '../widgets/simple_card_tracking.dart';
 
 class HomePage extends StatefulWidget {
