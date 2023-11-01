@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/data/models/packages_model.dart';
 import '../../../../core/themes/app_colors.dart';
+import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 
 class SimpleCardTracking extends StatelessWidget {
-  const SimpleCardTracking({
-    super.key,
-    required this.item,
-  });
+  const SimpleCardTracking({super.key, required this.item});
 
   final PackagesModel item;
 
@@ -31,7 +29,18 @@ class SimpleCardTracking extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () async {
+                    await showModalBottomSheet<PackagesModel>(
+                      useSafeArea: true,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (_) => ModalSearchPackges(
+                        isStarnedNow: false,
+                        isView: true,
+                        code: item.codigo,
+                      ),
+                    );
+                  },
                   borderRadius: BorderRadius.circular(20),
                   child: Icon(
                     Icons.remove_red_eye,
@@ -43,9 +52,9 @@ class SimpleCardTracking extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Text(
-              '${item.eventos.first.data} ${item.eventos.first.hora}',
+              item.eventos.first.status,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                   ),
             ),
           ],

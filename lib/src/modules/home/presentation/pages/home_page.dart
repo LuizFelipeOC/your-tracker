@@ -141,7 +141,10 @@ class _HomePageState extends State<HomePage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              builder: (_) => const ModalSearchPackges(isStarnedNow: true),
+              builder: (_) => const ModalSearchPackges(
+                isStarnedNow: true,
+                isView: false,
+              ),
             );
 
             if (object == null) {
