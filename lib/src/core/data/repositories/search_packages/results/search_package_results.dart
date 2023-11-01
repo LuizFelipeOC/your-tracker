@@ -35,3 +35,15 @@ final class FailureeGetAllPackages {
 
   FailureeGetAllPackages({required this.message});
 }
+
+final class SuccessUpdateListPackages {
+  List<PackagesModel> list;
+
+  SuccessUpdateListPackages({required this.list});
+}
+
+final class FailureUpdateListPackages {
+  String message;
+
+  FailureUpdateListPackages({required this.message});
+}

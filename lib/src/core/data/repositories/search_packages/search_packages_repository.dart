@@ -106,6 +106,32 @@ class SearchPackagesRepository implements IPackges {
     return Success(SuccesseGetAllPackages(list: list));
   }
 
+  @override
+  AsyncResult<SuccessUpdateListPackages, FailureUpdateListPackages> update({required PackagesModel package}) async {
+    final getAllPackagesCache = await localStorage.read(key: 'favorite_packages');
+
+    if (getAllPackagesCache.isError()) {
+      return Failure(FailureUpdateListPackages(message: 'Dont have items in cahced'));
+    }
+
+    getAllPackagesCache.onSuccess((success) {
+      packages = _transformCacheValue(data: success.data);
+
+      final getIndex = packages.indexWhere((element) => element.codigo == package.codigo);
+
+      packages.removeAt(getIndex);
+      packages.add(package);
+
+      for (var package in packages) {
+        listOfObjects.add(package.toMap());
+      }
+    });
+
+    await localStorage.save(key: 'favorite_packages', value: jsonEncode(listOfObjects.toString()));
+
+    return Success(SuccessUpdateListPackages(list: packages));
+  }
+
   PackagesModel _transformPackagesList({required data}) {
     final transformInObject = PackagesModel.fromMap(data);
     return transformInObject;

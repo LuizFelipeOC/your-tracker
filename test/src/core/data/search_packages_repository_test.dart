@@ -150,6 +150,29 @@ void main() {
       });
     });
   });
+
+  test('should test success update list when have new events', () async {
+    final model = PackagesModel.fromMap(responseEventsEmpty);
+    List<Map<String, dynamic>> listTwoObject = [model.toMap()];
+
+    when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
+      (_) async => Success(
+        SuccessReadData(data: responseEventsString),
+      ),
+    );
+
+    when(() => localStorage.save(key: 'favorite_packages', value: jsonEncode(listTwoObject.toString()))).thenAnswer(
+      (_) async => Success(SuccessSaveData()),
+    );
+
+    final sut = await repository.update(package: model);
+
+    expect(sut.isSuccess(), true);
+
+    sut.onSuccess((success) {
+      expect(success.list.length, 1);
+    });
+  });
 }
 
 const responseEvents = {
