@@ -12,10 +12,14 @@ import 'states_widgets/loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   final bool isStarnedNow;
+  final bool isView;
+  final String code;
 
   const ModalSearchPackges({
     super.key,
     required this.isStarnedNow,
+    required this.isView,
+    this.code = '',
   });
 
   @override
@@ -24,6 +28,16 @@ class ModalSearchPackges extends StatefulWidget {
 
 class _ModalSearchPackgesState extends State<ModalSearchPackges> {
   final searchPackagesStore = Modular.get<SearchPackagesController>();
+
+  @override
+  void initState() {
+    if (widget.isView) {
+      searchPackagesStore.trackCode.text = widget.code.trim();
+      searchPackagesStore.searchPackage();
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,58 +60,69 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
               ),
-              InkWell(
-                overlayColor: MaterialStatePropertyAll(AppColors.grey.withOpacity(0.1)),
-                borderRadius: BorderRadius.circular(50),
-                onTap: () {
-                  Modular.to.pop();
-                  searchPackagesStore.resetState();
-                },
-                child: const Icon(
-                  Icons.arrow_drop_down_rounded,
-                  size: 50,
-                ),
-              ),
+              ValueListenableBuilder(
+                  valueListenable: searchPackagesStore,
+                  builder: (contex, state, _) {
+                    return InkWell(
+                      overlayColor: MaterialStatePropertyAll(AppColors.grey.withOpacity(0.1)),
+                      borderRadius: BorderRadius.circular(50),
+                      onTap: () {
+                        if (state is LoadedSearchPackagesState) {
+                          return Modular.to.pop(state.packagesModel);
+                        }
+
+                        Modular.to.pop();
+                        searchPackagesStore.resetState();
+                      },
+                      child: const Icon(
+                        Icons.arrow_drop_down_rounded,
+                        size: 50,
+                      ),
+                    );
+                  }),
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  maxLength: 13,
-                  controller: searchPackagesStore.trackCode,
-                  style: Theme.of(context).textTheme.labelLarge,
-                  cursorColor: AppColors.secondaryColor,
-                  onChanged: (value) async {
-                    if (value.length >= 13) {
-                      FocusScope.of(context).unfocus();
-                      await searchPackagesStore.searchPackage();
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.trackingCode,
-                    hintStyle: Theme.of(context).textTheme.labelLarge,
-                    counterText: '',
+        Visibility(
+          visible: !widget.isView,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    maxLength: 13,
+                    controller: searchPackagesStore.trackCode,
+                    style: Theme.of(context).textTheme.labelLarge,
+                    cursorColor: AppColors.secondaryColor,
+                    onChanged: (value) async {
+                      if (value.length >= 13) {
+                        FocusScope.of(context).unfocus();
+                        await searchPackagesStore.searchPackage();
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.trackingCode,
+                      hintStyle: Theme.of(context).textTheme.labelLarge,
+                      counterText: '',
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 5),
-              SizedBox(
-                height: 56,
-                child: ElevatedButton(
-                  onPressed: () async => {
-                    FocusScope.of(context).unfocus(),
-                    await searchPackagesStore.searchPackage(),
-                  },
-                  child: const Icon(
-                    Icons.search,
+                const SizedBox(width: 5),
+                SizedBox(
+                  height: 56,
+                  child: ElevatedButton(
+                    onPressed: () async => {
+                      FocusScope.of(context).unfocus(),
+                      await searchPackagesStore.searchPackage(),
+                    },
+                    child: const Icon(
+                      Icons.search,
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
         Expanded(
@@ -137,17 +162,20 @@ class _ModalSearchPackgesState extends State<ModalSearchPackges> {
                         },
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.bottomRight,
-                      padding: const EdgeInsets.only(bottom: 30, left: 20, right: 20),
-                      child: TextButton(
-                        onPressed: () {
-                          Modular.to.pop(state.packagesModel);
-                        },
-                        child: FloatingActionButton.extended(
-                          onPressed: () => searchPackagesStore.favoritePackages(package: state.packagesModel),
-                          label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
-                          icon: const Icon(Icons.star),
+                    Visibility(
+                      visible: (!widget.isView) && (widget.isStarnedNow),
+                      child: Container(
+                        alignment: Alignment.bottomRight,
+                        padding: const EdgeInsets.only(bottom: 30, left: 20, right: 20),
+                        child: TextButton(
+                          onPressed: () {
+                            Modular.to.pop(state.packagesModel);
+                          },
+                          child: FloatingActionButton.extended(
+                            onPressed: () => searchPackagesStore.favoritePackages(package: state.packagesModel),
+                            label: Text(AppLocalizations.of(context)!.favoriteYourPackage),
+                            icon: const Icon(Icons.star),
+                          ),
                         ),
                       ),
                     ),

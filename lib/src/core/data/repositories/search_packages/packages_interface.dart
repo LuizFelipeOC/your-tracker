@@ -7,4 +7,5 @@ abstract interface class IPackges {
   AsyncResult<SuccessPackages, FailurePackages> get({required String packCode});
   AsyncResult<SuccessFavoritePackage, FailureFavoritePackage> favorite({required PackagesModel package});
   AsyncResult<SuccesseGetAllPackages, FailureeGetAllPackages> getAllCachedPackages();
+  AsyncResult<SuccessUpdateListPackages, FailureUpdateListPackages> update({required PackagesModel package});
 }

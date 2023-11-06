@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/data/models/packages_model.dart';
 import '../../../../core/data/repositories/search_packages/packages_interface.dart';
+import 'states/home_state.dart';
 
 class HomeController extends ValueNotifier<HomeState> {
   final IPackges packges;
@@ -35,22 +36,4 @@ class HomeController extends ValueNotifier<HomeState> {
   void _emitState({required HomeState state}) {
     value = state;
   }
-}
-
-abstract interface class HomeState {}
-
-final class IdleHomeState extends HomeState {}
-
-final class LoadingHomeState extends HomeState {}
-
-final class SuccessHomeState extends HomeState {
-  List<PackagesModel> list;
-
-  SuccessHomeState({required this.list});
-}
-
-final class ErrorHomeState extends HomeState {
-  String message;
-
-  ErrorHomeState({required this.message});
 }

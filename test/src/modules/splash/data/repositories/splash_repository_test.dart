@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:your_tracker/src/core/services/local_storage/flutter_secure_storage.dart';
-import 'package:your_tracker/src/core/services/local_storage/local_storage_dart.dart';
+import 'package:your_tracker/src/core/services/local_storage/results/local_storage_results.dart';
 import 'package:your_tracker/src/modules/splash/data/repositories/splash_repository.dart';
 
 class FlutterSecureStorageMock extends Mock implements FlutterSecureStorageService {}

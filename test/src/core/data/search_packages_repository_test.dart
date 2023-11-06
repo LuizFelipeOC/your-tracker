@@ -8,7 +8,7 @@ import 'package:your_tracker/src/core/data/repositories/search_packages/search_p
 import 'package:your_tracker/src/core/services/http/http.dart';
 import 'package:your_tracker/src/core/services/http/uno.dart';
 import 'package:your_tracker/src/core/services/local_storage/flutter_secure_storage.dart';
-import 'package:your_tracker/src/core/services/local_storage/local_storage_dart.dart';
+import 'package:your_tracker/src/core/services/local_storage/results/local_storage_results.dart';
 
 class UnoServiceMock extends Mock implements UnoService {}
 
@@ -148,6 +148,29 @@ void main() {
       result.onFailure((failure) {
         expect(failure.message, 'Already exist track code');
       });
+    });
+  });
+
+  test('should test success update list when have new events', () async {
+    final model = PackagesModel.fromMap(responseEventsEmpty);
+    List<Map<String, dynamic>> listTwoObject = [model.toMap()];
+
+    when(() => localStorage.read(key: 'favorite_packages')).thenAnswer(
+      (_) async => Success(
+        SuccessReadData(data: responseEventsString),
+      ),
+    );
+
+    when(() => localStorage.save(key: 'favorite_packages', value: jsonEncode(listTwoObject.toString()))).thenAnswer(
+      (_) async => Success(SuccessSaveData()),
+    );
+
+    final sut = await repository.update(package: model);
+
+    expect(sut.isSuccess(), true);
+
+    sut.onSuccess((success) {
+      expect(success.list.length, 1);
     });
   });
 }
