@@ -8,7 +8,7 @@ import 'package:your_tracker/src/core/data/repositories/search_packages/search_p
 import 'package:your_tracker/src/core/services/http/http.dart';
 import 'package:your_tracker/src/core/services/http/uno.dart';
 import 'package:your_tracker/src/core/services/local_storage/flutter_secure_storage.dart';
-import 'package:your_tracker/src/core/services/local_storage/local_storage_dart.dart';
+import 'package:your_tracker/src/core/services/local_storage/results/local_storage_results.dart';
 
 class UnoServiceMock extends Mock implements UnoService {}
 
