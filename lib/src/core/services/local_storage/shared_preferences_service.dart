@@ -2,6 +2,7 @@ import 'package:result_dart/result_dart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'local_storage_dart.dart';
+import 'results/local_storage_results.dart';
 
 class SharedPrefenceService implements ILocalStorage {
   @override

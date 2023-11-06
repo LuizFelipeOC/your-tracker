@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:result_dart/result_dart.dart';
 
 import 'local_storage_dart.dart';
+import 'results/local_storage_results.dart';
 
 class FlutterSecureStorageService implements ILocalStorage {
   FlutterSecureStorage _secureStorageInitialize() {
