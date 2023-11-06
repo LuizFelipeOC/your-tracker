@@ -1,3 +1,29 @@
 {
-    "hello": "Olá mundo"
+    "firstWelcomeText": "Bem-vindo em\n",
+    "secondWelcomeText": "YourTrack",
+    "subTitleWelcomeText": "Acompanhe melhor seus pacotes",
+    "welcomeFirstButton": "Começar agora",
+    "or": "Ou",
+    "simpleSearch": "Pesquisa Simples",
+    "searchingPackage": "Aguarde, estamos procurando seu pacote...",
+    "trackingCode": "Código do rastreio",
+    "errorGetPackage": "Ocorreu um erro ao tentar buscar o pacote, veja os possíveis motivos",
+    "firstErrorGetPackage": "O código informado está vazio!",
+    "secondErrorGetPackage": "O código informado está inválido!",
+    "thirdErrorErrorGetPackage": "O objeto ainda não foi inserido na base de dados do correio",
+    "idleTrackerState":"Digite o código de rastreamento e localize seu pedido",
+    "searchingStartNowTitle": "Pesquisar pacote",
+    "favoriteYourPackage": "Monitorar entrega",
+    "continueSearch": "Continue procurando",
+    "close": "Fechar",
+    "alreadyExistCode": "Já existe um pacote que você marcou com esse número de rastreamento",
+    "occurErrorSavePackage": "Ocorreu um erro desconhecido, por favor, tente novamente mais tarde",
+    "tryNow": "Tente novamente",
+    "successfulFavorited": "O pacote foi marcado com sucesso!",
+    "loadingFavorited": "Marcando este código, aguarde um momento!",
+    "buttonHomeAddCode": "Adicionar novo rastreio",
+    "emptyHomeItems": "Você ainda não salvou nenhum código, comece agora mesmo!",
+    "errorHomeItems": "Ocorreu um erro ao buscar os itens salvos",
+    "loadingMyPackages": "Estamos procurando pelos seus pacotes"
+    
 }
