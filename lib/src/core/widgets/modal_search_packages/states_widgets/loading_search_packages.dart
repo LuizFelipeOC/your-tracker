@@ -13,23 +13,18 @@ class LoadingSearchPackages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          LottieAssetsWidget(
-            pathAnimation: AppImage.laoding,
-            width: MediaQuery.of(context).size.width * .7,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-            ),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        LottieAssetsWidget(
+          pathAnimation: AppImage.laoding,
+          width: MediaQuery.of(context).size.width * .5,
+        ),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+        )
+      ],
     );
   }
 }
