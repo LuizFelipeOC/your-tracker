@@ -16,12 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homeStore = Modular.get<HomeController>();
+  final homeController = Modular.get<HomeController>();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      homeStore.getAllFavoritePackages();
+      homeController.animationAppBar();
+      homeController.getAllFavoritePackages();
     });
 
     super.initState();
@@ -37,9 +38,11 @@ class _HomePageState extends State<HomePage> {
           height: screen.height,
           child: Column(
             children: [
-              const HomeBarWidget(),
+              HomeBarWidget(
+                controller: homeController,
+              ),
               Expanded(
-                child: ListCodesTrackingSavedWidget(homeStore: homeStore),
+                child: ListCodesTrackingSavedWidget(homeStore: homeController),
               ),
             ],
           ),
@@ -65,11 +68,11 @@ class _HomePageState extends State<HomePage> {
             );
 
             if (object == null) {
-              await homeStore.getAllFavoritePackages();
+              await homeController.getAllFavoritePackages();
               return;
             }
 
-            homeStore.addPackageInList(packages: object);
+            homeController.addPackageInList(packages: object);
           },
           label: Text(AppLocalizations.of(context)!.buttonHomeAddCode),
         ),

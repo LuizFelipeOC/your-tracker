@@ -8,7 +8,7 @@ import '../controller/home_controller.dart';
 import '../controller/states/home_state.dart';
 import 'simple_card_tracking.dart';
 
-class ListCodesTrackingSavedWidget extends StatelessWidget {
+class ListCodesTrackingSavedWidget extends StatefulWidget {
   const ListCodesTrackingSavedWidget({
     super.key,
     required this.homeStore,
@@ -17,9 +17,15 @@ class ListCodesTrackingSavedWidget extends StatelessWidget {
   final HomeController homeStore;
 
   @override
+  State<ListCodesTrackingSavedWidget> createState() => _ListCodesTrackingSavedWidgetState();
+}
+
+class _ListCodesTrackingSavedWidgetState extends State<ListCodesTrackingSavedWidget> with SingleTickerProviderStateMixin {
+  @override
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: homeStore,
+      valueListenable: widget.homeStore,
       builder: (ctx, state, _) {
         if (state is LoadingHomeState) {
           return Center(
@@ -39,11 +45,21 @@ class ListCodesTrackingSavedWidget extends StatelessWidget {
           );
         }
 
+        if (state is EmptyHomeState) {
+          return Center(
+            child: BoxMessagesWidget(
+              icon: Icons.warning_amber_rounded,
+              iconColor: AppColors.orange,
+              title: AppLocalizations.of(context)!.emptyHomeItems,
+            ),
+          );
+        }
+
         if (state is SuccessHomeState) {
           return RefreshIndicator(
             backgroundColor: AppColors.white,
             color: AppColors.primaryColor,
-            onRefresh: () => homeStore.getAllFavoritePackages(),
+            onRefresh: () => widget.homeStore.getAllFavoritePackages(),
             child: ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
               itemCount: state.list.length,
@@ -55,16 +71,6 @@ class ListCodesTrackingSavedWidget extends StatelessWidget {
                   child: SimpleCardTracking(item: item),
                 );
               },
-            ),
-          );
-        }
-
-        if (state is EmptyHomeState) {
-          return Center(
-            child: BoxMessagesWidget(
-              icon: Icons.warning_amber_rounded,
-              iconColor: AppColors.orange,
-              title: AppLocalizations.of(context)!.emptyHomeItems,
             ),
           );
         }

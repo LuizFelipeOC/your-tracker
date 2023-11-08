@@ -8,6 +8,7 @@ class HomeController extends ValueNotifier<HomeState> {
   final IPackges packges;
 
   ValueNotifier<List<PackagesModel>> reactiveList = ValueNotifier([]);
+  ValueNotifier<bool> animationFadeInAppBar = ValueNotifier(false);
 
   HomeController({required this.packges}) : super(IdleHomeState());
 
@@ -36,6 +37,10 @@ class HomeController extends ValueNotifier<HomeState> {
     reactiveList.value.add(packages);
 
     _emitState(state: SuccessHomeState(list: reactiveList.value));
+  }
+
+  void animationAppBar() async {
+    animationFadeInAppBar.value = true;
   }
 
   void _emitState({required HomeState state}) {

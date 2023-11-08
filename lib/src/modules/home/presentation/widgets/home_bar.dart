@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../core/themes/app_colors.dart';
+import '../controller/home_controller.dart';
+
 class HomeBarWidget extends StatelessWidget {
+  final HomeController controller;
+
   const HomeBarWidget({
     super.key,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
-      alignment: Alignment.centerLeft,
-      child: Text.rich(
-        TextSpan(
-          text: AppLocalizations.of(context)!.firstWelcomeText,
-          style: Theme.of(context).textTheme.headlineSmall,
-          children: <TextSpan>[
+    return ValueListenableBuilder(
+      valueListenable: controller.animationFadeInAppBar,
+      builder: (ctx, animation, _) => Container(
+        padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+        alignment: Alignment.centerLeft,
+        child: AnimatedCrossFade(
+          firstChild: Text.rich(
             TextSpan(
-              text: AppLocalizations.of(context)!.secondWelcomeText,
-              style: Theme.of(context).textTheme.headlineMedium,
+              text: AppLocalizations.of(context)!.firstWelcomeText,
+              style: Theme.of(context).textTheme.headlineSmall,
+              children: <TextSpan>[
+                TextSpan(
+                  text: AppLocalizations.of(context)!.secondWelcomeText,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ],
             ),
-          ],
+            textAlign: TextAlign.start,
+          ),
+          secondChild: Container(
+            color: AppColors.green,
+          ),
+          sizeCurve: Curves.linearToEaseOut,
+          crossFadeState: animation ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          duration: const Duration(milliseconds: 800),
         ),
-        textAlign: TextAlign.start,
       ),
     );
   }
