@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/themes/app_colors.dart';
+import '../../../../core/widgets/messages_widgets/box_message_widgets.dart';
 import '../../../../core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
 import '../controller/home_controller.dart';
 import '../controller/states/home_state.dart';
@@ -30,38 +31,15 @@ class ListCodesTrackingSavedWidget extends StatelessWidget {
 
         if (state is ErrorHomeState) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  state.message == 'Dont have items in cahced' ? AppLocalizations.of(context)!.emptyHomeItems : AppLocalizations.of(context)!.errorHomeItems,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+            child: BoxMessagesWidget(
+              icon: Icons.error_outline_outlined,
+              iconColor: AppColors.red,
+              title: AppLocalizations.of(context)!.errorHomeItems,
             ),
           );
         }
 
         if (state is SuccessHomeState) {
-          if (state.list.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      AppLocalizations.of(context)!.emptyHomeItems,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-
           return RefreshIndicator(
             backgroundColor: AppColors.white,
             color: AppColors.primaryColor,
@@ -77,6 +55,16 @@ class ListCodesTrackingSavedWidget extends StatelessWidget {
                   child: SimpleCardTracking(item: item),
                 );
               },
+            ),
+          );
+        }
+
+        if (state is EmptyHomeState) {
+          return Center(
+            child: BoxMessagesWidget(
+              icon: Icons.warning_amber_rounded,
+              iconColor: AppColors.orange,
+              title: AppLocalizations.of(context)!.emptyHomeItems,
             ),
           );
         }
