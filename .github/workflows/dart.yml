@@ -58,5 +58,5 @@ jobs:
         with:
             appId: ${{secrets.APPID}}
             token: ${{secrets.TOKEN}}
-            groups: pre-tester
+            groups: qa-pikas
             file: build/app/outputs/apk/release/app-release.apk
