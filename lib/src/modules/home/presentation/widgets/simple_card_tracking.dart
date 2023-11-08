@@ -12,8 +12,8 @@ class SimpleCardTracking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      elevation: 0.55,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: Column(
@@ -49,13 +49,6 @@ class SimpleCardTracking extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-            const SizedBox(height: 5),
-            Text(
-              item.eventos.first.status,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
             ),
           ],
         ),
