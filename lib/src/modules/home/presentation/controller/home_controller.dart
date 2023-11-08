@@ -20,8 +20,13 @@ class HomeController extends ValueNotifier<HomeState> {
 
     result.fold((success) {
       reactiveList.value = success.list;
+
       _emitState(state: SuccessHomeState(list: success.list));
     }, (failure) {
+      if (reactiveList.value.isEmpty) {
+        return _emitState(state: EmptyHomeState());
+      }
+
       _emitState(state: ErrorHomeState(message: failure.message));
     });
   }
