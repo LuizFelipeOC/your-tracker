@@ -49,11 +49,17 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text.rich(
                     TextSpan(
                       text: AppLocalizations.of(context)!.firstWelcomeText,
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
+                          ),
                       children: <TextSpan>[
                         TextSpan(
                           text: AppLocalizations.of(context)!.secondWelcomeText,
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontSize: 36,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ],
                     ),
@@ -67,13 +73,16 @@ class _WelcomePageState extends State<WelcomePage> {
                     Center(
                       child: Image.asset(
                         AppImage.welcomeImage,
-                        width: screen.width * .5,
+                        width: screen.width * .45,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 50),
                     Text(
-                      AppLocalizations.of(context)!.subTitleWelcomeText,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      AppLocalizations.of(context)!.subTitleWelcomeText.toUpperCase(),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 18,
+                            letterSpacing: 0.98,
+                          ),
                     )
                   ],
                 ),
@@ -83,13 +92,15 @@ class _WelcomePageState extends State<WelcomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 46,
+                      height: 56,
                       width: screen.width * .80,
                       child: ElevatedButton(
                         onPressed: () => starNowController.startNow(),
                         child: Text(
-                          AppLocalizations.of(context)!.welcomeFirstButton,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          AppLocalizations.of(context)!.welcomeFirstButton.toUpperCase(),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                letterSpacing: 2.0,
+                              ),
                         ),
                       ),
                     ),
@@ -116,7 +127,11 @@ class _WelcomePageState extends State<WelcomePage> {
                         );
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.simpleSearch,
+                        AppLocalizations.of(context)!.simpleSearch.toUpperCase(),
+                        style: const TextStyle(
+                          letterSpacing: 2.0,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ),
                   ],
