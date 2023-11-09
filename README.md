@@ -6,7 +6,7 @@ Here you have the two steps of searching for your packages, one of the steps is 
 
 <br />
 
-Now, i work in planning of architecture together [Rodrigo Sousa](https://github.com/rodrigoross), you can see the back-end development to sync data and futures things that we planning to facilitate  imporatation and controller  your sellings or only salvar your codes to fast find. 
+Now, i work in planning of architecture together [Rodrigo Sousa](https://github.com/rodrigoross), you can see the back-end development to sync data and futures things that we planning to facilitate  imporatation and controller  your sellings or only save your codes to fast find. 
 
 ### Techs
 
