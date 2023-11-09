@@ -2,7 +2,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../app_module.dart';
 import 'presentation/controller/search_packages_controller.dart';
-import 'data/repositories/search_packages/packages_interface.dart';
 import 'data/repositories/search_packages/search_packages_repository.dart';
 import 'presentation/pages/search_packages_page.dart';
 
@@ -12,7 +11,7 @@ class SearchPackagesModule extends Module {
 
   @override
   void binds(Injector i) {
-    i.add<IPackges>(SearchPackagesRepository.new);
+    i.add(SearchPackagesRepository.new);
     i.add(SearchPackagesController.new);
     super.binds(i);
   }
