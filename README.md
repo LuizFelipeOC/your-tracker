@@ -4,6 +4,10 @@ Hello and welcome in **YourTracker**, this app is experimental created after hav
 <br />
 Here you have the two steps of searching for your packages, one of the steps is a simple search where you try to find by tracking code and the second step you can save the various codes and view the tracking at any time
 
+<br />
+
+Now, i work in planning of architecture together [Rodrigo Sousa](https://github.com/rodrigoross), you can see the back-end development to sync data and futures things that we planning to facilitate  imporatation and controller  your sellings or only salvar your codes to fast find. 
+
 ### Techs
 
 I decided use the libraries published of Flutterando (The larger Braziliam Community of Flutter), these being:
