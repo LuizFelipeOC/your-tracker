@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 
 import '../../../search_packages/data/models/packages_model.dart';
-import '../../../search_packages/data/repositories/search_packages/packages_interface.dart';
 import 'states/home_state.dart';
 
 class HomeController extends ValueNotifier<HomeState> {
-  final IPackges packges;
+  // final IPackges packges;
 
   ValueNotifier<List<PackagesModel>> reactiveList = ValueNotifier([]);
   ValueNotifier<bool> animationFadeInAppBar = ValueNotifier(false);
 
-  HomeController({required this.packges}) : super(IdleHomeState());
+  HomeController() : super(IdleHomeState());
 
   Future<void> getAllFavoritePackages() async {
     _emitState(state: LoadingHomeState());
 
-    final result = await packges.getAllCachedPackages();
+    // final result = await packges.getAllCachedPackages();
 
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
 
-    result.fold((success) {
-      reactiveList.value = success.list;
+    // result.fold((success) {
+    //   reactiveList.value = success.list;
 
-      _emitState(state: SuccessHomeState(list: success.list));
-    }, (failure) {
-      if (reactiveList.value.isEmpty) {
-        return _emitState(state: EmptyHomeState());
-      }
+    //   _emitState(state: SuccessHomeState(list: success.list));
+    // }, (failure) {
+    //   if (reactiveList.value.isEmpty) {
+    //     return _emitState(state: EmptyHomeState());
+    //   }
 
-      _emitState(state: ErrorHomeState(message: failure.message));
-    });
+    //   _emitState(state: ErrorHomeState(message: failure.message));
+    // });
   }
 
   void addPackageInList({required PackagesModel packages}) async {
