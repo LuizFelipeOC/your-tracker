@@ -4,7 +4,7 @@ import 'package:result_dart/result_dart.dart';
 import 'package:your_tracker/src/modules/welcome/data/repositories/welcome_repository.dart';
 import 'package:your_tracker/src/modules/welcome/data/repositories/welcome_results/welcome_results.dart';
 import 'package:your_tracker/src/modules/welcome/presentation/controller/welcome_controller.dart';
-import 'package:your_tracker/src/modules/welcome/presentation/states/start_now_state.dart';
+import 'package:your_tracker/src/modules/welcome/presentation/states/welcome_state.dart';
 
 class WelcomeRepositoryMck extends Mock implements WelcomeRepository {}
 
@@ -17,7 +17,7 @@ void main() {
     controller = WelcomeController(welcomeRepository: repository);
   });
   test('init state how idle start now', () async {
-    expect(controller.value, isA<IdleStartNowState>());
+    expect(controller.value, isA<IdleWelcomeState>());
   });
 
   test('save finish with success', () async {
@@ -25,6 +25,6 @@ void main() {
 
     await controller.startNow();
 
-    expect(controller.value, isA<LoadedNowState>());
+    expect(controller.value, isA<SuccessWelcomeState>());
   });
 }

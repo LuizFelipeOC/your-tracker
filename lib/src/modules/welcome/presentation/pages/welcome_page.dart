@@ -6,7 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../core/themes/app_images.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 import '../controller/welcome_controller.dart';
-import '../states/start_now_state.dart';
+import '../states/welcome_state.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -21,7 +21,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     _welcomeController.addListener(() {
-      if (_welcomeController.value is LoadedNowState) {
+      if (_welcomeController.value is SuccessWelcomeState) {
         Navigator.pushReplacementNamed(context, '/home/');
       }
     });
