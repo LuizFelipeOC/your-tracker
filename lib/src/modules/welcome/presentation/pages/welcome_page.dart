@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/themes/app_images.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
-import '../controller/start_now_controller.dart';
+import '../controller/welcome_controller.dart';
 import '../states/start_now_state.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -16,12 +16,12 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  final starNowController = Modular.get<StartNowController>();
+  final _welcomeController = Modular.get<WelcomeController>();
 
   @override
   void initState() {
-    starNowController.addListener(() {
-      if (starNowController.value is LoadedNowState) {
+    _welcomeController.addListener(() {
+      if (_welcomeController.value is LoadedNowState) {
         Navigator.pushReplacementNamed(context, '/home/');
       }
     });
@@ -95,7 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       height: 56,
                       width: screen.width * .80,
                       child: ElevatedButton(
-                        onPressed: () => starNowController.startNow(),
+                        onPressed: () => _welcomeController.startNow(),
                         child: Text(
                           AppLocalizations.of(context)!.welcomeFirstButton.toUpperCase(),
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
