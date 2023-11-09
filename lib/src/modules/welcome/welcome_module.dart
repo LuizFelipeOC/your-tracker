@@ -4,7 +4,7 @@ import '../../app_module.dart';
 import '../../core/data/repositories/search_packages/search_packages_repository.dart';
 import 'data/repositories/welcome_repository.dart';
 import '../../core/controller/search_packages_controller.dart';
-import 'presentation/controller/start_now_controller.dart';
+import 'presentation/controller/welcome_controller.dart';
 import 'presentation/pages/welcome_page.dart';
 
 final class WelcomeModule extends Module {
@@ -16,7 +16,7 @@ final class WelcomeModule extends Module {
     i.add(SearchPackagesRepository.new);
     i.add(SearchPackagesController.new);
     i.add(WelcomeRepository.new);
-    i.add(StartNowController.new);
+    i.add(WelcomeController.new);
     super.binds(i);
   }
 
