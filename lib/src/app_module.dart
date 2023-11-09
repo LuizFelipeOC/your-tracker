@@ -8,6 +8,7 @@ import 'core/services/local_storage/flutter_secure_storage.dart';
 import 'core/services/local_storage/local_storage_dart.dart';
 import 'core/services/local_storage/shared_preferences_service.dart';
 import 'modules/home/home_module.dart';
+import 'modules/search_packages/search_packages_module.dart';
 import 'modules/splash/splash_module.dart';
 import 'modules/welcome/welcome_module.dart';
 
@@ -40,6 +41,12 @@ final class AppModule extends Module {
     r.module(
       '/home/',
       module: HomeModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 400),
+    );
+    r.module(
+      '/search-packages/',
+      module: SearchPackagesModule(),
       transition: TransitionType.fadeIn,
       duration: const Duration(milliseconds: 400),
     );
