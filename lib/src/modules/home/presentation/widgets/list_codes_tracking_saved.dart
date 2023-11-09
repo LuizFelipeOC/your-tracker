@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/widgets/messages_widgets/box_message_widgets.dart';
-import '../../../../core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
+import '../../../search_packages/presentation/widgets/loading_search_packages.dart';
 import '../controller/home_controller.dart';
 import '../controller/states/home_state.dart';
 import 'simple_card_tracking.dart';

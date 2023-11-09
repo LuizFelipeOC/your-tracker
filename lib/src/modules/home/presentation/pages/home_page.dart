@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/data/models/packages_model.dart';
+import '../../../search_packages/data/models/packages_model.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 import '../controller/home_controller.dart';
 import '../widgets/home_bar.dart';

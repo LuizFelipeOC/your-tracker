@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../app_module.dart';
-import '../../core/controller/search_packages_controller.dart';
-import '../../core/data/repositories/search_packages/packages_interface.dart';
-import '../../core/data/repositories/search_packages/search_packages_repository.dart';
+import 'presentation/controller/search_packages_controller.dart';
+import 'data/repositories/search_packages/packages_interface.dart';
+import 'data/repositories/search_packages/search_packages_repository.dart';
 import 'presentation/pages/search_packages_page.dart';
 
 class SearchPackagesModule extends Module {

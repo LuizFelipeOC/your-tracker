@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/controller/search_packages_controller.dart';
-import '../../../../core/controller/states/search_packages_states.dart';
+import '../controller/search_packages_controller.dart';
+import '../controller/states/search_packages_states.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../widgets/list_tracking_packages.dart';
 import '../widgets/search_package_header.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../themes/app_images.dart';
-import '../../lotties_widgets/lottie_assets.dart';
+import '../../../../core/themes/app_images.dart';
+import '../../../../core/widgets/lotties_widgets/lottie_assets.dart';
 
 class LoadingSearchPackages extends StatelessWidget {
   final String title;

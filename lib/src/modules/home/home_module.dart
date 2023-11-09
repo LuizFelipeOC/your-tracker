@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../app_module.dart';
-import '../../core/data/repositories/search_packages/packages_interface.dart';
-import '../../core/data/repositories/search_packages/search_packages_repository.dart';
+import '../search_packages/data/repositories/search_packages/packages_interface.dart';
+import '../search_packages/data/repositories/search_packages/search_packages_repository.dart';
 import '../welcome/welcome_module.dart';
 import 'presentation/controller/home_controller.dart';
 import 'presentation/pages/home_page.dart';

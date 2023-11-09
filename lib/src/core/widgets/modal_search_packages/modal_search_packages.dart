@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../controller/search_packages_controller.dart';
-import '../../controller/states/search_packages_states.dart';
-import 'erros_searchs_packages/error_search_packages_informations.dart';
+import '../../../modules/search_packages/presentation/controller/search_packages_controller.dart';
+import '../../../modules/search_packages/presentation/controller/states/search_packages_states.dart';
+import '../../../modules/search_packages/presentation/widgets/error_search_packages_informations.dart';
 import '../../themes/app_colors.dart';
 import 'card_tracking_packages.dart';
 import 'states_widgets/favorited_message_packages.dart';
-import 'states_widgets/loading_search_packages.dart';
+import '../../../modules/search_packages/presentation/widgets/loading_search_packages.dart';
 
 class ModalSearchPackges extends StatefulWidget {
   final bool isStarnedNow;

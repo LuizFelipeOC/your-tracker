@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../controller/search_packages_controller.dart';
+import '../../../../modules/search_packages/presentation/controller/search_packages_controller.dart';
 import '../../../themes/app_images.dart';
 
 class FavoritedMessagePackage extends StatefulWidget {

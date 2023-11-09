@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/controller/search_packages_controller.dart';
-import '../../../../core/controller/states/search_packages_states.dart';
+import '../controller/search_packages_controller.dart';
+import '../controller/states/search_packages_states.dart';
 import '../../../../core/widgets/modal_search_packages/card_tracking_packages.dart';
-import '../../../../core/widgets/modal_search_packages/erros_searchs_packages/error_search_packages_informations.dart';
-import '../../../../core/widgets/modal_search_packages/states_widgets/loading_search_packages.dart';
+import 'error_search_packages_informations.dart';
+import 'loading_search_packages.dart';
 
 class ListTrackingPackagesWidget extends StatelessWidget {
   const ListTrackingPackagesWidget({
