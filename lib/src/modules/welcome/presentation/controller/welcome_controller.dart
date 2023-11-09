@@ -6,22 +6,20 @@ import '../states/start_now_state.dart';
 class WelcomeController extends ValueNotifier<StartNowState> {
   final WelcomeRepository welcomeRepository;
 
-  WelcomeController({required this.welcomeRepository}) : super(IdleStartNowState());
+  WelcomeController({
+    required this.welcomeRepository,
+  }) : super(IdleStartNowState());
+
+  void _emit({required StartNowState state}) => value = state;
 
   Future<void> startNow() async {
     _emit(state: LoadingNowState());
 
     final result = await welcomeRepository.startNow();
 
-    if (result.isSuccess()) {
-      _emit(state: LoadedNowState());
-      return;
-    }
-
-    _emit(state: ErrorNowState());
-  }
-
-  void _emit({required StartNowState state}) {
-    value = state;
+    result.fold(
+      (success) => _emit(state: LoadedNowState()),
+      (failure) => _emit(state: ErrorNowState()),
+    );
   }
 }
