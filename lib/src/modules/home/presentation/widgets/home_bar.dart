@@ -6,11 +6,9 @@ import '../controller/home_controller.dart';
 
 class HomeBarWidget extends StatelessWidget {
   final HomeController controller;
+  final GlobalKey<ScaffoldState> scaffolKey;
 
-  const HomeBarWidget({
-    super.key,
-    required this.controller,
-  });
+  const HomeBarWidget({super.key, required this.controller, required this.scaffolKey});
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +50,13 @@ class HomeBarWidget extends StatelessWidget {
               crossFadeState: animation ? CrossFadeState.showFirst : CrossFadeState.showSecond,
               duration: const Duration(milliseconds: 800),
             ),
-            Icon(
-              Icons.menu,
-              size: 46,
-              color: AppColors.white,
+            GestureDetector(
+              onTap: () => scaffolKey.currentState!.openEndDrawer(),
+              child: Icon(
+                Icons.menu,
+                size: 46,
+                color: AppColors.white,
+              ),
             )
           ],
         ),
