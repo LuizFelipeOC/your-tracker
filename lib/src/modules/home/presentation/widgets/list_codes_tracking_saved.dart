@@ -28,7 +28,8 @@ class _ListCodesTrackingSavedWidgetState extends State<ListCodesTrackingSavedWid
       valueListenable: widget.homeStore,
       builder: (ctx, state, _) {
         if (state is LoadingHomeState) {
-          return Center(
+          return Container(
+            alignment: Alignment.topCenter,
             child: LoadingSearchPackages(
               title: AppLocalizations.of(context)!.loadingMyPackages,
             ),
