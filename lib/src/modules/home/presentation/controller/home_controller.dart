@@ -4,8 +4,6 @@ import '../../../search_packages/data/models/packages_model.dart';
 import 'states/home_state.dart';
 
 class HomeController extends ValueNotifier<HomeState> {
-  // final IPackges packges;
-
   ValueNotifier<List<PackagesModel>> reactiveList = ValueNotifier([]);
   ValueNotifier<bool> animationFadeInAppBar = ValueNotifier(false);
 
@@ -14,21 +12,9 @@ class HomeController extends ValueNotifier<HomeState> {
   Future<void> getAllFavoritePackages() async {
     _emitState(state: LoadingHomeState());
 
-    // final result = await packges.getAllCachedPackages();
+    await Future.delayed(const Duration(seconds: 1));
 
-    // await Future.delayed(const Duration(seconds: 1));
-
-    // result.fold((success) {
-    //   reactiveList.value = success.list;
-
-    //   _emitState(state: SuccessHomeState(list: success.list));
-    // }, (failure) {
-    //   if (reactiveList.value.isEmpty) {
-    //     return _emitState(state: EmptyHomeState());
-    //   }
-
-    //   _emitState(state: ErrorHomeState(message: failure.message));
-    // });
+    _emitState(state: EmptyHomeState());
   }
 
   void addPackageInList({required PackagesModel packages}) async {
