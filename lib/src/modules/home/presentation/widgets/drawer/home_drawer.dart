@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/themes/app_colors.dart';
+import '../../controller/drawer_controller.dart';
 import 'home_drawer_header.dart';
 import 'home_drawer_options.dart';
 
 class HomeDrawerWidget extends StatelessWidget {
-  const HomeDrawerWidget({
+  final HomeDrawerController controller = HomeDrawerController();
+
+  HomeDrawerWidget({
     super.key,
     required this.screen,
   });
@@ -29,17 +32,41 @@ class HomeDrawerWidget extends StatelessWidget {
             child: HomeDrawerHeader(screen: screen),
           ),
           Expanded(
-            flex: 2,
-            child: ListView(
+            child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               physics: const NeverScrollableScrollPhysics(),
-              children: [
-                HomeDrawerOptions(
-                  icon: Icons.search,
-                  title: 'Find Package',
-                  onTap: () => {},
+              itemCount: controller.routes.length,
+              itemBuilder: (ctx, index) {
+                final options = controller.routes[index];
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 35),
+                  child: HomeDrawerOptions(
+                    routes: options,
+                    icons: controller.defineIcon[options.title]!,
+                  ),
+                );
+              },
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 40),
+              alignment: Alignment.bottomCenter,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: AppColors.grey,
                 ),
-              ],
+                child: Text(
+                  'SAIR DA CONTA',
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                        color: AppColors.red,
+                        letterSpacing: 2,
+                        fontWeight: FontWeight.normal,
+                      ),
+                ),
+                onPressed: () => {},
+              ),
             ),
           )
         ],

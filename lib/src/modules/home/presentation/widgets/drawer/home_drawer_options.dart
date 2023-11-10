@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../data/model/drawer_routes_model.dart';
 
 class HomeDrawerOptions extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final Function() onTap;
+  final DrawerRoutesModel routes;
+  final IconData icons;
 
-  const HomeDrawerOptions({super.key, required this.title, required this.icon, required this.onTap});
+  const HomeDrawerOptions({super.key, required this.routes, required this.icons});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () => Modular.to.pushNamed(routes.routes),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: 30,
-          ),
+          Icon(icons, size: 30),
           const SizedBox(width: 10),
-          Text(title)
+          Text(routes.title),
         ],
       ),
     );
