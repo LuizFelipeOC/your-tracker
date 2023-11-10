@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../search_packages/data/models/packages_model.dart';
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
+import '../../../../search_packages/data/models/packages_model.dart';
 
 class SimpleCardTracking extends StatelessWidget {
   const SimpleCardTracking({super.key, required this.item});
