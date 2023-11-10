@@ -19,26 +19,45 @@ class HomeBarWidget extends StatelessWidget {
       builder: (ctx, animation, _) => Container(
         padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
         alignment: Alignment.centerLeft,
-        child: AnimatedCrossFade(
-          firstChild: Text.rich(
-            TextSpan(
-              text: AppLocalizations.of(context)!.firstWelcomeText,
-              style: Theme.of(context).textTheme.headlineSmall,
-              children: <TextSpan>[
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AnimatedCrossFade(
+              firstChild: Text.rich(
                 TextSpan(
-                  text: AppLocalizations.of(context)!.secondWelcomeText,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  text: AppLocalizations.of(context)!.firstWelcomeText,
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: AppColors.white,
+                        letterSpacing: 2,
+                        fontSize: 20,
+                      ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: AppLocalizations.of(context)!.secondWelcomeText,
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                            letterSpacing: 2,
+                          ),
+                    ),
+                  ],
                 ),
-              ],
+                textAlign: TextAlign.start,
+              ),
+              secondChild: Container(
+                color: AppColors.green,
+              ),
+              sizeCurve: Curves.linearToEaseOut,
+              crossFadeState: animation ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 800),
             ),
-            textAlign: TextAlign.start,
-          ),
-          secondChild: Container(
-            color: AppColors.green,
-          ),
-          sizeCurve: Curves.linearToEaseOut,
-          crossFadeState: animation ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-          duration: const Duration(milliseconds: 800),
+            Icon(
+              Icons.menu,
+              size: 46,
+              color: AppColors.white,
+            )
+          ],
         ),
       ),
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../core/themes/app_colors.dart';
 import '../controller/home_controller.dart';
 import '../widgets/home_bar.dart';
 import '../widgets/list_codes_tracking_saved.dart';
@@ -30,28 +31,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SizedBox(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(180),
+          child: Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(bottom: 50),
+            decoration: BoxDecoration(
+              gradient: AppColors.linear,
+            ),
+            child: HomeBarWidget(
+              controller: homeController,
+            ),
+          ),
+        ),
+        body: SizedBox(
           height: screen.height,
           child: Column(
             children: [
-              HomeBarWidget(
-                controller: homeController,
-              ),
               Expanded(
-                child: ListCodesTrackingSavedWidget(homeStore: homeController),
+                child: ListCodesTrackingSavedWidget(
+                  homeStore: homeController,
+                ),
               ),
             ],
           ),
-        ),
-      ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(10),
-        child: FloatingActionButton.extended(
-          onPressed: () => Modular.to.pushNamed('/search-packages/', arguments: false),
-          label: Text(AppLocalizations.of(context)!.buttonHomeAddCode),
         ),
       ),
     );
