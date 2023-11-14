@@ -10,10 +10,8 @@ void main() {
   late CacheService cacheService;
 
   setUp(() {
-    SharedPreferences.setMockInitialValues({});
-
     sharedPreferencesSpy = SharedPrefencesSpy();
-    cacheService = CacheService();
+    cacheService = CacheService(sharedPreferences: sharedPreferencesSpy);
   });
 
   group('Should test save values with shared preferences:', () {
@@ -53,6 +51,20 @@ void main() {
       final sut = await cacheService.save(key: 'undefined', value: null);
 
       expect(sut.isError(), isTrue);
+    });
+  });
+
+  group('Should test read values in SharedPrefences', () {
+    test('if have value in preferences', () async {
+      when(() => sharedPreferencesSpy.get('any-value')).thenAnswer((_) async => 'Any Value');
+
+      final sut = await cacheService.read(key: 'any-value');
+
+      expect(sut.isSuccess(), isTrue);
+
+      sut.onSuccess((success) {
+        expect(success.response, isA<Object>());
+      });
     });
   });
 }
