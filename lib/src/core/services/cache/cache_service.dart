@@ -5,12 +5,10 @@ import 'cache_interface.dart';
 import 'results/cache_results.dart';
 
 class CacheService implements ICache {
-  final SharedPreferences sharedPreferences;
-
-  CacheService({required this.sharedPreferences});
-
   @override
   AsyncResult<SuccessSaveResult, FailureSaveResult> save({required String key, required value}) async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     if (value is String) {
       await sharedPreferences.setString(key, value);
       return Success(SuccessSaveResult());
@@ -36,6 +34,8 @@ class CacheService implements ICache {
 
   @override
   AsyncResult<SuccessReadResult, FailureReadResult> read({required key}) async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     final response = sharedPreferences.get(key);
 
     if (response == null) return Failure(FailureReadResult());

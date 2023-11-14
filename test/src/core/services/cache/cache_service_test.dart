@@ -11,7 +11,7 @@ void main() {
 
   setUp(() {
     sharedPreferencesSpy = SharedPrefencesSpy();
-    cacheService = CacheService(sharedPreferences: sharedPreferencesSpy);
+    cacheService = CacheService();
   });
 
   group('Should test save values with shared preferences:', () {
@@ -55,9 +55,9 @@ void main() {
   });
 
   group('Should test read values in SharedPrefences', () {
-    test('if have value in preferences', () async {
-      when(() => sharedPreferencesSpy.get('any-value')).thenAnswer((_) async => 'Any Value');
+    SharedPreferences.setMockInitialValues({'any-value': 'Any Value'});
 
+    test('if have value in preferences', () async {
       final sut = await cacheService.read(key: 'any-value');
 
       expect(sut.isSuccess(), isTrue);
