@@ -5,6 +5,7 @@ import 'core/services/cache/cache_interface.dart';
 import 'core/services/cache/cache_service.dart';
 import 'core/services/uno/http_interface.dart';
 import 'core/services/uno/uno_service.dart';
+import 'modules/search_packages/search_packages_module.dart';
 import 'modules/welcome/welcome_module.dart';
 
 final class AppModule extends Module {
@@ -19,6 +20,7 @@ final class AppModule extends Module {
   @override
   void routes(RouteManager r) {
     r.module(Modular.initialRoute, module: WelcomeModule());
+    r.module('/search-packages/', module: SearchPackagesModule());
     super.routes(r);
   }
 }
