@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class WelcomePageBottom extends StatelessWidget {
   const WelcomePageBottom({
@@ -30,7 +31,7 @@ class WelcomePageBottom extends StatelessWidget {
           const SizedBox(height: 20),
           Text(AppLocalizations.of(context)!.or),
           TextButton(
-            onPressed: () {},
+            onPressed: () => Modular.to.pushNamed('/search-packages/'),
             child: Text(AppLocalizations.of(context)!.simpleSearch),
           )
         ],
