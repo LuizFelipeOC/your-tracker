@@ -5,6 +5,7 @@ import 'core/services/cache/cache_interface.dart';
 import 'core/services/cache/cache_service.dart';
 import 'core/services/uno/http_interface.dart';
 import 'core/services/uno/uno_service.dart';
+import 'modules/home/home_module.dart';
 import 'modules/search_packages/search_packages_module.dart';
 import 'modules/welcome/welcome_module.dart';
 
@@ -21,6 +22,7 @@ final class AppModule extends Module {
   void routes(RouteManager r) {
     r.module(Modular.initialRoute, module: WelcomeModule());
     r.module('/search-packages/', module: SearchPackagesModule());
+    r.module('/home/', module: HomeModule());
     super.routes(r);
   }
 }
