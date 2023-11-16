@@ -22,7 +22,7 @@ class WelcomePageBottom extends StatelessWidget {
             height: 50,
             width: screen.width,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Modular.to.pushReplacementNamed('/home/'),
               child: Text(
                 AppLocalizations.of(context)!.welcomeFirstButton.toUpperCase(),
               ),
