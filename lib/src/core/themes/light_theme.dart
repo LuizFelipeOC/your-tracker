@@ -10,7 +10,20 @@ final class LightTheme {
         elevatedButtonTheme: _elevatedButtonTheme(),
         textButtonTheme: _textButtonnTheme(),
         inputDecorationTheme: _inputDecorationTheme(),
+        chipTheme: _chipThemeData(),
       );
+
+  static ChipThemeData _chipThemeData() {
+    return ChipThemeData(
+      selectedColor: AppColors.primary,
+      backgroundColor: AppColors.primary.withOpacity(0.75),
+      labelStyle: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+      ),
+      pressElevation: 0,
+    );
+  }
 
   static InputDecorationTheme _inputDecorationTheme() => InputDecorationTheme(
         filled: true,
@@ -84,6 +97,11 @@ final class LightTheme {
         labelSmall: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
+          color: AppColors.primary,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
           color: AppColors.primary,
         ),
       );
