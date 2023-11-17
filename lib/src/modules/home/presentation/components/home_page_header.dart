@@ -4,7 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/widgets/font_awesome/font_awesome.dart';
 
 class HomePageHeader extends StatelessWidget {
+  final GlobalKey<ScaffoldState> scaffoldState;
+
   const HomePageHeader({
+    required this.scaffoldState,
     super.key,
   });
 
@@ -32,9 +35,12 @@ class HomePageHeader extends StatelessWidget {
               ],
             ),
           ),
-          const FontAwesomeIcon(
-            fontAwesomeIcon: FontAwesomeIcons.barsStaggered,
-            size: 30,
+          GestureDetector(
+            onTap: () => scaffoldState..currentState!.openEndDrawer(),
+            child: const FontAwesomeIcon(
+              fontAwesomeIcon: FontAwesomeIcons.barsStaggered,
+              size: 30,
+            ),
           )
         ],
       ),
