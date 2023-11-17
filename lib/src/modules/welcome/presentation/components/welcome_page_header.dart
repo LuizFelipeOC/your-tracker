@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../controller/animation_entrace_controller.dart';
 
 class WelcomePageHeader extends StatefulWidget {
   const WelcomePageHeader({
@@ -13,17 +15,16 @@ class WelcomePageHeader extends StatefulWidget {
 }
 
 class _WelcomePageHeaderState extends State<WelcomePageHeader> {
-  bool isAnimation = false;
+  final _animationController = Modular.get<AnimationEntranceController>();
 
   @override
   void initState() {
-    _animation();
-    super.initState();
-  }
+    _animationController.firstAnimationEntrance();
 
-  void _animation() async {
-    await Future.delayed(const Duration(milliseconds: 700));
-    setState(() => isAnimation = true);
+    _animationController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
   }
 
   @override
@@ -54,8 +55,8 @@ class _WelcomePageHeaderState extends State<WelcomePageHeader> {
           ),
         ),
       ),
-      crossFadeState: isAnimation ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-      duration: const Duration(milliseconds: 500),
+      crossFadeState: _animationController.isFirstAnimation ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+      duration: const Duration(milliseconds: 900),
       sizeCurve: Curves.bounceIn,
     );
   }
