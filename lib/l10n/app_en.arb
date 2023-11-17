@@ -24,6 +24,9 @@
     "buttonHomeAddCode": "Add new package",
     "emptyHomeItems": "You haven't savlled any codes yet, get started right now!",
     "errorHomeItems": "An error occurred while fetching the saved items",
-    "loadingMyPackages": "We're looking for your packages"
-
+    "loadingMyPackages": "We're looking for your packages",
+    "unauthenticatedFirstMessage": "Join our community!\n",
+    "unauthenticatedSecondMessage": "Log in or create an account now to enjoy a personalized experience",
+    "registerMessage": "Register account",
+    "alreadyAccountMessage": "Already have account "
 }
