@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../app_module.dart';
-import '../../core/data/repositories/search_packages/search_packages_repository.dart';
+import '../search_packages/data/repositories/search_packages/search_packages_repository.dart';
 import 'data/repositories/welcome_repository.dart';
-import '../../core/controller/search_packages_controller.dart';
+import '../search_packages/presentation/controller/search_packages_controller.dart';
 import 'presentation/controller/welcome_controller.dart';
 import 'presentation/pages/welcome_page.dart';
 

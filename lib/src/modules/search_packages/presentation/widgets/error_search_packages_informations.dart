@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'error_search_packages_items.dart';
+import '../../../../core/widgets/modal_search_packages/erros_searchs_packages/error_search_packages_items.dart';
 
 class ErrorSearchPackageInformations extends StatelessWidget {
   const ErrorSearchPackageInformations({

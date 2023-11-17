@@ -1,4 +1,4 @@
-import '../../data/models/packages_model.dart';
+import '../../../data/models/packages_model.dart';
 
 abstract interface class SearchPackagesState {}
 

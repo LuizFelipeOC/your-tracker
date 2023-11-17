@@ -1,4 +1,4 @@
-import '../../../../../core/data/models/packages_model.dart';
+import '../../../../search_packages/data/models/packages_model.dart';
 
 abstract interface class HomeState {}
 

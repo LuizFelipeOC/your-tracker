@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../data/models/packages_model.dart';
-import '../data/repositories/search_packages/search_packages_repository.dart';
+import '../../data/models/packages_model.dart';
+import '../../data/repositories/search_packages/search_packages_repository.dart';
 import 'states/search_packages_states.dart';
 
 class SearchPackagesController extends ValueNotifier<SearchPackagesState> {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 import '../controller/welcome_controller.dart';
 
 class WelcomeBottomWidget extends StatelessWidget {
@@ -39,21 +39,7 @@ class WelcomeBottomWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         TextButton(
-          onPressed: () {
-            showModalBottomSheet(
-              useSafeArea: true,
-              isScrollControlled: true,
-              isDismissible: false,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-              context: context,
-              builder: (ctx) => const ModalSearchPackges(
-                isStarnedNow: false,
-                isView: false,
-              ),
-            );
-          },
+          onPressed: () => Modular.to.pushNamed('/search-packages/', arguments: true),
           child: Text(
             AppLocalizations.of(context)!.simpleSearch.toUpperCase(),
             style: const TextStyle(

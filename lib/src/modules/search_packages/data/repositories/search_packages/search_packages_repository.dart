@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:result_dart/result_dart.dart';
 
-import '../../../services/http/http.dart';
-import '../../../services/local_storage/local_storage_dart.dart';
+import '../../../../../core/services/http/http.dart';
+import '../../../../../core/services/local_storage/local_storage_dart.dart';
 import '../../models/packages_model.dart';
 import 'packages_interface.dart';
 import 'results/search_package_results.dart';

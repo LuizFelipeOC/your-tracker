@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 final class AppColors {
@@ -10,12 +12,14 @@ final class AppColors {
   static Color green = const Color(0xFF75eb86);
   static Color orange = const Color(0xFFed330e);
 
-  static LinearGradient textGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+  static final linear = LinearGradient(
+    end: Alignment.centerRight,
+    begin: Alignment.centerLeft,
     colors: [
       primaryColor,
-      secondaryColor,
+      const Color.fromARGB(255, 95, 6, 162),
     ],
+    stops: const [0.0, 0.9885],
+    transform: const GradientRotation(2.13959913 * pi),
   );
 }

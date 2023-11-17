@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/data/models/packages_model.dart';
+import '../../../search_packages/data/models/packages_model.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
 

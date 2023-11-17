@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/data/models/packages_model.dart';
-import '../../../../core/widgets/modal_search_packages/modal_search_packages.dart';
+import '../../../../core/themes/app_colors.dart';
 import '../controller/home_controller.dart';
+import '../widgets/drawer/home_drawer.dart';
 import '../widgets/home_bar.dart';
 import '../widgets/list_codes_tracking_saved.dart';
 
@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final homeController = Modular.get<HomeController>();
+  final GlobalKey<ScaffoldState> _scaffolKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -32,49 +33,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SizedBox(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        endDrawer: HomeDrawerWidget(screen: screen),
+        key: _scaffolKey,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(180),
+          child: Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(bottom: 50),
+            decoration: BoxDecoration(
+              gradient: AppColors.linear,
+            ),
+            child: HomeBarWidget(
+              scaffolKey: _scaffolKey,
+              controller: homeController,
+            ),
+          ),
+        ),
+        body: SizedBox(
           height: screen.height,
           child: Column(
             children: [
-              HomeBarWidget(
-                controller: homeController,
-              ),
               Expanded(
-                child: ListCodesTrackingSavedWidget(homeStore: homeController),
+                child: ListCodesTrackingSavedWidget(
+                  homeStore: homeController,
+                ),
               ),
             ],
           ),
-        ),
-      ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(10),
-        child: FloatingActionButton.extended(
-          onPressed: () async {
-            final object = await showModalBottomSheet<PackagesModel?>(
-              context: context,
-              isDismissible: false,
-              isScrollControlled: true,
-              useSafeArea: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              builder: (_) => const ModalSearchPackges(
-                isStarnedNow: true,
-                isView: false,
-              ),
-            );
-
-            if (object == null) {
-              await homeController.getAllFavoritePackages();
-              return;
-            }
-
-            homeController.addPackageInList(packages: object);
-          },
-          label: Text(AppLocalizations.of(context)!.buttonHomeAddCode),
         ),
       ),
     );
