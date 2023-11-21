@@ -37,6 +37,18 @@ class DatabaseService implements IDatabase {
     }
   }
 
+  @override
+  AsyncResult<SuccessInsertDatabase, FailureInsertDatabase> insert({required String table, required Map<String, dynamic> value}) async {
+    final database = await openDatabase(await _getPathDatabase);
+
+    try {
+      await database.insert(table, value, conflictAlgorithm: ConflictAlgorithm.replace);
+      return Success(SuccessInsertDatabase(isSaved: true));
+    } catch (e) {
+      return Failure(FailureInsertDatabase(message: e.toString()));
+    }
+  }
+
   Future<Database> _createTablesDatabase() async {
     return await openDatabase(
       await _getPathDatabase,

@@ -17,3 +17,15 @@ final class FailureCountDatabase {
 
   FailureCountDatabase({required this.message});
 }
+
+final class SuccessInsertDatabase {
+  bool isSaved = false;
+
+  SuccessInsertDatabase({required this.isSaved});
+}
+
+final class FailureInsertDatabase {
+  String message;
+
+  FailureInsertDatabase({required this.message});
+}
