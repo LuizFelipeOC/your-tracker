@@ -41,3 +41,15 @@ final class FailureDeleteDatabase {
 
   FailureDeleteDatabase({required this.message});
 }
+
+final class SuccessUpdatedDatabase {
+  bool isUpdated = false;
+
+  SuccessUpdatedDatabase({required this.isUpdated});
+}
+
+final class FailureUpdatedDatabase {
+  String message;
+
+  FailureUpdatedDatabase({required this.message});
+}

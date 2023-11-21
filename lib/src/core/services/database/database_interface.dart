@@ -7,4 +7,5 @@ abstract interface class IDatabase {
   AsyncResult<SuccessCountDatabase, FailureCountDatabase> count({required String nameTable});
   AsyncResult<SuccessInsertDatabase, FailureInsertDatabase> insert({required String table, required Map<String, dynamic> value});
   AsyncResult<SuccessDeletedDatabase, FailureDeleteDatabase> delete({required String table, required String? where, List<Object>? whereArgs});
+  AsyncResult<SuccessUpdatedDatabase, FailureUpdatedDatabase> update({required String table, required String? where, List<Object>? whereArgs});
 }
