@@ -3,6 +3,7 @@ import 'package:uno/uno.dart';
 
 import 'core/services/cache/cache_interface.dart';
 import 'core/services/cache/cache_service.dart';
+import 'core/services/database/database_interface.dart';
 import 'core/services/database/database_service.dart';
 import 'core/services/uno/http_interface.dart';
 import 'core/services/uno/uno_service.dart';
@@ -16,7 +17,7 @@ final class AppModule extends Module {
     i.addSingleton(Uno.new);
     i.addSingleton<IHttpService>(UnoService.new);
     i.addSingleton<ICache>(CacheService.new);
-    i.addSingleton(DatabaseService.new);
+    i.addSingleton<IDatabase>(DatabaseService.new);
     super.binds(i);
   }
 
