@@ -4,4 +4,7 @@ import 'results/database_results.dart';
 
 abstract interface class IDatabase {
   AsyncResult<SuccessInitializeDatabase, FailureInitializeDatabase> init();
+  AsyncResult<SuccessCountDatabase, FailureCountDatabase> count({
+    required String nameTable,
+  });
 }

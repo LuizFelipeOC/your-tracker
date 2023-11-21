@@ -24,6 +24,19 @@ class DatabaseService implements IDatabase {
     }
   }
 
+  @override
+  AsyncResult<SuccessCountDatabase, FailureCountDatabase> count({required String nameTable}) async {
+    final database = await openDatabase(await _getPathDatabase);
+
+    try {
+      final count = await database.query(nameTable);
+
+      return Success(SuccessCountDatabase(quantityData: count.length));
+    } catch (e) {
+      return Failure(FailureCountDatabase(message: e.toString()));
+    }
+  }
+
   Future<Database> _createTablesDatabase() async {
     return await openDatabase(
       await _getPathDatabase,
