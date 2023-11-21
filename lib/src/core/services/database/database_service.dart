@@ -49,6 +49,22 @@ class DatabaseService implements IDatabase {
     }
   }
 
+  @override
+  AsyncResult<SuccessDeletedDatabase, FailureDeleteDatabase> delete({
+    required String table,
+    required String? where,
+    List<Object>? whereArgs,
+  }) async {
+    final database = await openDatabase(await _getPathDatabase);
+
+    try {
+      await database.delete(table, where: where, whereArgs: whereArgs);
+      return Success(SuccessDeletedDatabase(isDeleted: true));
+    } catch (e) {
+      return Failure(FailureDeleteDatabase(message: e.toString()));
+    }
+  }
+
   Future<Database> _createTablesDatabase() async {
     return await openDatabase(
       await _getPathDatabase,

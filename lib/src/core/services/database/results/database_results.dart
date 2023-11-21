@@ -29,3 +29,15 @@ final class FailureInsertDatabase {
 
   FailureInsertDatabase({required this.message});
 }
+
+final class SuccessDeletedDatabase {
+  bool isDeleted = false;
+
+  SuccessDeletedDatabase({required this.isDeleted});
+}
+
+final class FailureDeleteDatabase {
+  String message;
+
+  FailureDeleteDatabase({required this.message});
+}
