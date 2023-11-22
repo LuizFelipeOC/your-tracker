@@ -8,21 +8,19 @@ class HomePageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
-      child: Flexible(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.helloText,
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            const SizedBox(height: 5),
-            Text(
-              AppLocalizations.of(context)!.homeSubtitleText,
-              style: Theme.of(context).textTheme.bodyLarge,
-            )
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.helloText,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            AppLocalizations.of(context)!.homeSubtitleText,
+            style: Theme.of(context).textTheme.bodyLarge,
+          )
+        ],
       ),
     );
   }

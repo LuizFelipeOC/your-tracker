@@ -11,6 +11,12 @@ final class LightTheme {
         textButtonTheme: _textButtonnTheme(),
         inputDecorationTheme: _inputDecorationTheme(),
         chipTheme: _chipThemeData(),
+        cardTheme: _cardTheme(),
+      );
+
+  static CardTheme _cardTheme() => CardTheme(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       );
 
   static ChipThemeData _chipThemeData() {
