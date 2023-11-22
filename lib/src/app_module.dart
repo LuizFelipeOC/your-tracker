@@ -17,7 +17,7 @@ final class AppModule extends Module {
     i.addSingleton(Uno.new);
     i.addSingleton<IHttpService>(UnoService.new);
     i.addSingleton<ICache>(CacheService.new);
-    i.addSingleton<IDatabase>(DatabaseService.new);
+    i.add<IDatabase>(DatabaseService.new);
     super.binds(i);
   }
 

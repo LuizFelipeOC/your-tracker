@@ -45,15 +45,15 @@ class _WelcomePageBottomState extends State<WelcomePageBottom> {
               child: ElevatedButton(
                 onPressed: () => Modular.to.pushReplacementNamed('/home/'),
                 child: Text(
-                  AppLocalizations.of(context)!.welcomeFirstButton.toUpperCase(),
+                  AppLocalizations.of(context)!.startNowButtonText.toUpperCase(),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            Text(AppLocalizations.of(context)!.or),
+            Text(AppLocalizations.of(context)!.orText),
             TextButton(
               onPressed: () => Modular.to.pushNamed('/search-packages/'),
-              child: Text(AppLocalizations.of(context)!.simpleSearch),
+              child: Text(AppLocalizations.of(context)!.fastSearchText.toUpperCase()),
             )
           ],
         ),

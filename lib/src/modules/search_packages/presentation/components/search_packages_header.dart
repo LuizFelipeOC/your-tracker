@@ -32,7 +32,7 @@ class SearchPackagesHeader extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            AppLocalizations.of(context)!.simpleSearch,
+            AppLocalizations.of(context)!.fastSearchText,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: AppColors.primary,
                 ),
@@ -41,7 +41,7 @@ class SearchPackagesHeader extends StatelessWidget {
           TextField(
             style: Theme.of(context).textTheme.labelSmall,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.trackingCode,
+              hintText: AppLocalizations.of(context)!.trackingCodeText,
               counterText: '',
               suffixIcon: InkWell(
                 onTap: () => {},
