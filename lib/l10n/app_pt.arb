@@ -1,14 +1,11 @@
 {
     "firstWelcomeText": "Bem-vindo em\n",
     "secondWelcomeText": "YourTrack",
-    "subTitleWelcomeText": "Acompanhe melhor seus pacotes",
-    "welcomeFirstButton": "Começar agora",
-    "or": "Ou",
-    "simpleSearch": "Pesquisa Simples",
-    "searchingPackage": "Aguarde, estamos procurando seu pacote...",
-    "trackingCode": "Código do rastreio",
-    "unauthenticatedFirstMessage": "Junte-se à nossa comunidade!\n",
-    "unauthenticatedSecondMessage": "Faça login ou crie uma conta agora para aproveitar uma experiência personalizada",
-    "registerMessage": "Criar conta",
-    "alreadyAccountMessage": "Já tenho uma conta"
+    "messageWelcomeText": "Aprimore o rastreamento dos seus pacotes de melhor forma!",
+    "startNowButtonText": "Começar agora",
+    "orText": "Ou",
+    "fastSearchText": "Busca rápida",
+    "trackingCodeText": "Código de rastreio",
+    "helloText": "Olá",
+    "homeSubtitleText": "Aqui estão os pacotes que você já salvou!"
 }
