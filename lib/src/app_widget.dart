@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'core/services/database/database_service.dart';
+import 'core/services/database/database_interface.dart';
 import 'core/themes/light_theme.dart';
 
 class AppWidget extends StatefulWidget {
@@ -13,7 +13,7 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  final _databaseService = Modular.get<DatabaseService>();
+  final _databaseService = Modular.get<IDatabase>();
 
   @override
   void initState() {

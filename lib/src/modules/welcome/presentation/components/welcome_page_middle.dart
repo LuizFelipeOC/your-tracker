@@ -45,9 +45,13 @@ class _WelcomePageMiddleState extends State<WelcomePageMiddle> {
                 width: widget.screen.width * .5,
               ),
               const SizedBox(height: 30),
-              Text(
-                AppLocalizations.of(context)!.subTitleWelcomeText,
-                style: Theme.of(context).textTheme.headlineSmall,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  AppLocalizations.of(context)!.messageWelcomeText,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
               )
             ],
           ),
