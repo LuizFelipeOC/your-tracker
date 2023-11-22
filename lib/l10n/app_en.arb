@@ -7,5 +7,8 @@
     "fastSearchText": "Fast search",
     "trackingCodeText": "Tracking code",
     "helloText": "Hello",    
-    "homeSubtitleText": "Here are the packages you've saved!"
+    "homeSubtitleText": "Here are the packages you've saved!",
+    "seachablePakcage": "YourTracker is trying to track your order...",
+    "notFoundPackage": "Não encontramos nenhum pacote com este código de rastreio!",
+    "allErrors": "Ocorreu um erro interno, estamos verificando para corrigi-lo o mais rápido possível!"
 }
