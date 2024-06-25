@@ -62,6 +62,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 delay: Duration(milliseconds: 450),
                 duration: Duration(seconds: 3),
               ),
+          const SizedBox(height: 50),
+          TextButton(
+            onPressed: () {},
+            child: Text('Pesquisa rápida'),
+          ).animate().fade(
+                delay: Duration(milliseconds: 550),
+                duration: Duration(seconds: 3),
+              ),
         ],
       ),
     );
