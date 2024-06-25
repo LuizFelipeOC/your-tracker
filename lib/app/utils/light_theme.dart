@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+
+import 'app_colors.dart';
+
+class LightTheme {
+  static ThemeData get themeData => ThemeData(
+        fontFamily: 'Ubuntu',
+        textTheme: _textThemeData(),
+        elevatedButtonTheme: _elevatedButtonThemeData(),
+      );
+
+  static ElevatedButtonThemeData _elevatedButtonThemeData() {
+    return ElevatedButtonThemeData(
+      style: ButtonStyle(
+        overlayColor: WidgetStatePropertyAll<Color>(AppColors.white.withOpacity(0.1)),
+        backgroundColor: WidgetStatePropertyAll<Color>(AppColors.primary),
+        foregroundColor: WidgetStatePropertyAll<Color>(AppColors.white),
+        textStyle: WidgetStatePropertyAll<TextStyle>(
+          TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  static TextTheme _textThemeData() {
+    return TextTheme(
+      headlineMedium: TextStyle(fontWeight: FontWeight.w500, fontSize: 26, color: AppColors.primary),
+      bodyMedium: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.primary),
+    );
+  }
+}
