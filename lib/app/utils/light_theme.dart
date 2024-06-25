@@ -7,7 +7,20 @@ class LightTheme {
         fontFamily: 'Ubuntu',
         textTheme: _textThemeData(),
         elevatedButtonTheme: _elevatedButtonThemeData(),
+        textButtonTheme: _textButtonThemeData(),
       );
+
+  static TextButtonThemeData _textButtonThemeData() {
+    return TextButtonThemeData(
+      style: ButtonStyle(
+        overlayColor: WidgetStatePropertyAll<Color>(AppColors.primary.withOpacity(0.2)),
+        foregroundColor: WidgetStatePropertyAll<Color>(AppColors.primary),
+        textStyle: WidgetStatePropertyAll<TextStyle>(
+          TextStyle(fontWeight: FontWeight.w500),
+        ),
+      ),
+    );
+  }
 
   static ElevatedButtonThemeData _elevatedButtonThemeData() {
     return ElevatedButtonThemeData(
