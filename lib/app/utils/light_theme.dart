@@ -9,7 +9,45 @@ class LightTheme {
         elevatedButtonTheme: _elevatedButtonThemeData(),
         textButtonTheme: _textButtonThemeData(),
         iconTheme: _iconThemeData(),
+        inputDecorationTheme: _inputDecorationTheme(),
       );
+
+  static InputDecorationTheme _inputDecorationTheme() {
+    return InputDecorationTheme(
+      filled: true,
+      fillColor: AppColors.primary.withOpacity(0.04),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          color: AppColors.primary.withOpacity(0.4),
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          color: AppColors.primary.withOpacity(0.8),
+        ),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          color: Colors.red.shade300,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(
+          color: Colors.red.shade300,
+        ),
+      ),
+      errorStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+      hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    );
+  }
 
   static IconThemeData _iconThemeData() {
     return IconThemeData(
