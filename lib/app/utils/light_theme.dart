@@ -8,7 +8,15 @@ class LightTheme {
         textTheme: _textThemeData(),
         elevatedButtonTheme: _elevatedButtonThemeData(),
         textButtonTheme: _textButtonThemeData(),
+        iconTheme: _iconThemeData(),
       );
+
+  static IconThemeData _iconThemeData() {
+    return IconThemeData(
+      size: 45,
+      color: AppColors.primary,
+    );
+  }
 
   static TextButtonThemeData _textButtonThemeData() {
     return TextButtonThemeData(
@@ -42,6 +50,7 @@ class LightTheme {
     return TextTheme(
       headlineMedium: TextStyle(fontWeight: FontWeight.w500, fontSize: 26, color: AppColors.primary),
       bodyMedium: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.primary),
+      bodyLarge: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.primary),
     );
   }
 }
