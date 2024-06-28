@@ -21,14 +21,14 @@ class ApiServiceImp implements ApiService {
   @override
   AsyncResult<SuccessApi, FailureApi> get({Map<String, String>? queryParams}) async {
     try {
-      final response = await _client.get(Uri.https(Env().url).replace(queryParameters: queryParameters));
+      final response = await _client.get(Uri.parse('${Env().url}${queryParams!['codigo']}'));
 
       if (response.statusCode == 200) {
         final decoding = (jsonDecode(response.body) as Map<String, dynamic>);
         return Success(SuccessApi(data: decoding));
       }
 
-      return Failure(FailureApi(message: response.body, statusCode: 401));
+      return Failure(FailureApi(message: response.body, statusCode: response.statusCode));
     } on FormatException catch (err) {
       return Failure(BadResponse(message: err.message));
     } on SocketException catch (err) {

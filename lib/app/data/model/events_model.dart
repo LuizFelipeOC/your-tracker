@@ -3,7 +3,7 @@ class EventsModel {
   String hours;
   String place;
   String status;
-  List<String> subStatus;
+  List<dynamic> subStatus;
 
   EventsModel({
     required this.date,
@@ -19,7 +19,7 @@ class EventsModel {
       hours: map['hora'] as String,
       place: map['local'] as String,
       status: map['status'] as String,
-      subStatus: map['subStatus'] as List<String>,
+      subStatus: map['subStatus'] as List<dynamic>,
     );
   }
 }

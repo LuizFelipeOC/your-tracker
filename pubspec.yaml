@@ -17,6 +17,7 @@ dependencies:
   result_dart: ^1.1.1
   http: ^0.13.6
   mocktail: ^1.0.4
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

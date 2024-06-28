@@ -10,7 +10,18 @@ class LightTheme {
         textButtonTheme: _textButtonThemeData(),
         iconTheme: _iconThemeData(),
         inputDecorationTheme: _inputDecorationTheme(),
+        floatingActionButtonTheme: _floatingActionButtonThemeData(),
       );
+
+  static FloatingActionButtonThemeData _floatingActionButtonThemeData() {
+    return FloatingActionButtonThemeData(
+      foregroundColor: AppColors.white,
+      extendedTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      splashColor: AppColors.primary.withOpacity(0.2),
+      backgroundColor: AppColors.primary,
+    );
+  }
 
   static InputDecorationTheme _inputDecorationTheme() {
     return InputDecorationTheme(
@@ -89,6 +100,7 @@ class LightTheme {
       headlineMedium: TextStyle(fontWeight: FontWeight.w500, fontSize: 26, color: AppColors.primary),
       bodyMedium: TextStyle(fontWeight: FontWeight.w400, fontSize: 16, color: AppColors.primary),
       bodyLarge: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.primary),
+      bodySmall: TextStyle(fontWeight: FontWeight.w500, fontSize: 12, color: AppColors.primary),
     );
   }
 }
