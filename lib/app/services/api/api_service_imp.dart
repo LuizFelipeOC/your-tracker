@@ -19,7 +19,7 @@ class ApiServiceImp implements ApiService {
   }
 
   @override
-  AsyncResult<SuccessApi, FailureApi> get() async {
+  AsyncResult<SuccessApi, FailureApi> get({Map<String, String>? queryParams}) async {
     try {
       final response = await _client.get(Uri.https(Env().url).replace(queryParameters: queryParameters));
 
