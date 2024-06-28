@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/media_query_values.dart';
+import '../search_package/search_package.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -16,8 +17,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+          Container(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+              child: TextButton(
+                onPressed: () {},
+                child: Text('SIGN IN'),
+              ).animate().fade(
+                    delay: Duration(milliseconds: 250),
+                    duration: Duration(seconds: 1),
+                  ),
+            ),
+          ),
           Center(
             child: Column(
               children: <Widget>[
@@ -55,7 +69,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
             height: 52,
             width: context.width * .90,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<bool>(
+                    builder: (_) => const SearchPackage(),
+                  ),
+                );
+              },
               child: Text('PESQUISA RÁPIDA'),
             ),
           ).animate().fade(
