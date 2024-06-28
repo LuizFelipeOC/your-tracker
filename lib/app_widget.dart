@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app/pages/onboarding/onboarding.dart';
+import 'app/views/onboarding/onboarding.dart';
 import 'app/utils/light_theme.dart';
 
 class AppWidget extends StatelessWidget {
