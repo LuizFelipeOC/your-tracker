@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 
+import '../../services/database/database.dart';
 import '../../utils/app_images.dart';
 import '../../utils/media_query_values.dart';
 import '../search_package/search_package.dart';
@@ -13,6 +15,17 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+  late IDatabase _databaseController;
+
+  @override
+  void initState() {
+    _databaseController = context.read<IDatabase>();
+
+    _databaseController.init();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
